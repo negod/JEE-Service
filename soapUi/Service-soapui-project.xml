@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="4c35a2a0-f722-40f7-bc81-7bbcc47092ef" activeEnvironment="Default" name="Service archetype" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d763a7c9-f981-4c25-869e-96cb26793207" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://192.168.2.140:8082" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://192.168.2.140:8082</con:endpoint></con:endpoints><con:resource name="Service" path="/service/rest/${#Project#ServiceName}}/{id}" id="8b666819-71cf-49b6-a80e-bb00ce366dca"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>bfedc82b-296c-415a-bac1-b1691a51bfe6</con:value><con:style>TEMPLATE</con:style><con:default>bfedc82b-296c-415a-bac1-b1691a51bfe6</con:default><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Delete" id="e3e2a53b-a10e-4c53-8b84-79b754689de0" method="DELETE"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Delete" id="fc4297a9-3233-4c75-baee-d6fb129c85bd" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder><con:entry>id</con:entry></con:parameterOrder></con:request></con:method><con:method name="Update" id="e08390c5-0f26-49ec-9a9d-afc890475ece" method="PUT"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>405</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ser="http://192.168.2.140/service/rest/service/">ser:Response</con:element></con:representation><con:request name="Update" id="f72f21df-c5e0-4662-b070-317839df77ed" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request>{"name":"test2"}</con:request><con:originalUri>http://192.168.2.140/service/rest/service/</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="bfedc82b-296c-415a-bac1-b1691a51bfe6" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>id</con:entry></con:parameterOrder></con:request></con:method><con:method name="GetById" id="58c18ce9-70fc-443d-b116-99250bdc93e4" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:bfed="http://192.168.2.140/service/rest/service/bfedc82b-296c-415a-bac1-b1691a51bfe6">bfed:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="GetById" id="264e557a-2377-406c-bd55-4cb399b8fb7c" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/bfedc82b-296c-415a-bac1-b1691a51bfe6</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="99b8bff9-4edf-4fbc-bfd7-23ee1df6d05d" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource><con:resource name="Service" path="/service/rest/${#Project#ServiceName}" id="34e98a8f-09c7-43c1-987a-b95a28b5bba9"><con:settings/><con:parameters/><con:method name="GetAll" id="2681b6c0-3349-4bc5-9784-10f2f1d581df" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="GetAll" id="45020183-5255-4fda-a66c-ca5a5e1144b7" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request></con:method><con:method name="Create" id="3bad21c8-c78a-4409-8842-86f3d250b3f6" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ser="http://192.168.2.140/service/rest/service">ser:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html</con:mediaType><con:status>400</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Create" id="b6e03607-3510-474a-8d8e-92097a94757b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request>{"name":"${#Project#name}"}</con:request><con:originalUri>http://192.168.2.140/service/rest/service</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request></con:method></con:resource><con:resource name="SearchFields" path="/service/rest/${#Project#ServiceName}/search/fields" id="523351fb-4b16-4735-9baa-fd5b3c240680"><con:settings/><con:parameters/><con:method name="GetSearchFields" id="ff904ac6-b3ea-4236-babe-51b793198fb7" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="GetSearchFields" id="b37b101a-e01f-463d-853c-eec1f5991228" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/search/fields</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="list" path="/service/rest/${#Project#ServiceName}/list" id="24ee9d1c-730d-4e15-b5a7-ac40c42d1bee"><con:settings/><con:parameters/><con:method name="GetFilteredList" id="7a06cc2e-f576-49ad-90df-ebc76112dd72" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="GetFilteredList" id="9cb4a2c0-3b18-4e1b-b16e-5068fa7c7f7d" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request>{
+	"searchFields":["name"],
+	"pagination":{
+		"listSize":40,
+		"page":0
+		},
+	"globalSearchWord":"23"
+}
+</con:request><con:originalUri>http://192.168.2.140/service/rest/service/list</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="Index" path="/service/rest/${#Project#ServiceName}/index" id="d83f973d-55f9-4b15-a1f5-e381062acd6b"><con:settings/><con:parameters/><con:method name="Index" id="ad5e1072-4504-4172-85c9-0f3b2f15d8b9" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>*/*</con:mediaType><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Index" id="ebef0de0-ca54-45f2-af75-ae7850af0b5d" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/index</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="7079416b-b5db-4723-ba00-9c139f104f4f" name="Service Test"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="f784c9a7-951e-402b-851f-8d8831112d58" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Create" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Create And Set Request Data" id="38a4e78b-acf8-42ce-b834-99d46f7d694d"><con:settings/><con:config><script>import static java.util.UUID.randomUUID
+import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+def uuid = randomUUID() as String
+
+testRunner.testCase.testSuite.setPropertyValue( "Name", uuid ) 
+
+
+
+
+
+
+
+
+
+
+</script></con:config></con:testStep><con:testStep type="restrequest" name="Create" id="626e507d-5e6a-4cb5-bc30-06ebf0464653"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}" methodName="Create" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Create" id="b6e03607-3510-474a-8d8e-92097a94757b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request>{"name":"${#TestSuite#Name}"}</con:request><con:originalUri>http://192.168.2.140/service/rest/service</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="01d001ea-971e-472d-87f7-fd4bbebf3cd1" name="Check 200 is returned"><con:configuration><codes>200
+</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="ab49d409-d824-4927-a3cb-45aa01f9e46b" name="Response SLA"><con:configuration><SLA>1000</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Set Returned Id As Parameter" id="1f5ccf45-7858-49b3-a5af-b31889899e80"><con:settings/><con:config><script>import static java.util.UUID.randomUUID
+import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+
+// get the response where you've the values you want to get
+// using the name of your test step
+def response = context.expand('${Create#Response}')
+
+//Set the returned ID as a parameter
+def jsonResp = new JsonSlurper().parseText(response)
+testRunner.testCase.testSuite.setPropertyValue( "Id", jsonResp.id ) </script></con:config></con:testStep><con:testStep type="groovy" name="Assert Generic Data" id="b652a781-ae7b-4a10-bff1-2fcf3109b9c4"><con:settings/><con:config><script>import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.util.regex.Matcher
+
+// get the response where you've the values you want to get
+// using the name of your test step
+def response = context.expand('${Create#Response}')
+
+//Parse response
+def jsonResp = new JsonSlurper().parseText(response)
+
+//Assert the returned id is a UUID
+def id = jsonResp.id =~ /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/
+assert id.matches()
+
+//Assert the returned date down to hours granuarity
+def createdDate = new Date()
+createdDate.setTime(jsonResp.updatedDate)
+def parsedDate = createdDate.format("yyyy-MM-dd HH")
+
+def nowDate = new Date().format("yyyy-MM-dd HH")
+
+def createdAssertion = parsedDate =~ nowDate
+assert createdAssertion.matches()
+
+
+
+
+
+</script></con:config></con:testStep><con:testStep type="groovy" name="Assert Fields" id="f2b49dc2-052c-46a5-8c22-dc3c252112ac"><con:settings/><con:config><script>import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.util.regex.Matcher
+
+// get the response where you've the values you want to get
+// using the name of your test step
+def response = context.expand('${Create#Response}')
+
+//Parse response
+def jsonResp = new JsonSlurper().parseText(response)
+
+//Assert the returned name
+assert jsonResp.name == testRunner.testCase.testSuite.getPropertyValue("Name")
+
+
+
+
+
+
+
+</script></con:config></con:testStep><con:testStep type="restrequest" name="Create With Same Name" id="f9af0eb6-0a00-4acd-be4e-64ee9afdb5c0"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}" methodName="Create" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Create With Same Name" id="b6e03607-3510-474a-8d8e-92097a94757b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request>{"name":"${#TestSuite#Name}"}</con:request><con:originalUri>http://192.168.2.140/service/rest/service</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="01d001ea-971e-472d-87f7-fd4bbebf3cd1" name="Check that name cannot be created again"><con:configuration><codes>500
+</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="46160377-fa2b-4267-8db7-4aa31f4e8757" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GetById" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Create Entity" id="e101ff12-2eaf-4aca-a0f1-142ab380f875"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>f784c9a7-951e-402b-851f-8d8831112d58</con:targetTestCase><con:properties/><con:returnProperties/><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="GetById" id="96e869a8-035b-4fb1-8bfe-f21e0d33510e"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}}/{id}" methodName="GetById" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetById" id="264e557a-2377-406c-bd55-4cb399b8fb7c" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/bfedc82b-296c-415a-bac1-b1691a51bfe6</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="c170debe-1907-48c7-b82c-29be79213eee" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="db021b5e-b6dd-4774-9294-2db5e252abe4" name="Response SLA"><con:configuration><SLA>1000</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestSuite#Id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Assert Fields" id="b16ed2d0-8752-4c8b-a93a-6b88ca4fc277"><con:settings/><con:config><script>import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.util.regex.Matcher
+
+// get the response where you've the values you want to get
+// using the name of your test step
+def response = context.expand('${GetById#Response}')
+
+//Parse response
+def jsonResp = new JsonSlurper().parseText(response)
+
+//Assert correct name is returned
+assert jsonResp.name == testRunner.testCase.testSuite.getPropertyValue("Name")
+
+//Assert correct id is returned
+assert jsonResp.id == testRunner.testCase.testSuite.getPropertyValue("Id")
+
+
+
+
+
+
+
+</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="d809f2af-6c9b-4276-a540-e7ec76a4298c" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Update" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Create" id="fed2fbe4-843f-4eb5-8666-c85dc0c5aac8"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>f784c9a7-951e-402b-851f-8d8831112d58</con:targetTestCase><con:properties/><con:returnProperties/><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="calltestcase" name="Assert Created" id="7a727dfe-52f0-4f85-acec-8f9d08766c01"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>46160377-fa2b-4267-8db7-4aa31f4e8757</con:targetTestCase><con:properties/><con:returnProperties/><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="groovy" name="Create And Set Request Data" id="943930bc-b169-45e4-8d58-a3f5f0874bc7"><con:settings/><con:config><script>import static java.util.UUID.randomUUID
+import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+def uuid = randomUUID() as String
+
+testRunner.testCase.testSuite.setPropertyValue( "UpdatedName", uuid ) 
+
+
+
+
+
+
+
+
+
+
+
+</script></con:config></con:testStep><con:testStep type="restrequest" name="Update" id="0d99e4db-03ed-4347-bd2d-05a8519b99ca"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}}/{id}" methodName="Update" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Update" id="f72f21df-c5e0-4662-b070-317839df77ed" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request>{"name":"${#TestSuite#UpdatedName}"}</con:request><con:originalUri>http://192.168.2.140/service/rest/service/</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestSuite#Id}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Assert Fields" id="b0977c57-49d2-44d2-94e3-641d321bb0cf"><con:settings/><con:config><script>import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.util.regex.Matcher
+
+// get the response where you've the values you want to get
+// using the name of your test step
+def response = context.expand('${Update#Response}')
+
+//Parse response
+def jsonResp = new JsonSlurper().parseText(response)
+
+//Assert correct name is returned
+assert jsonResp.name == testRunner.testCase.testSuite.getPropertyValue("UpdatedName")
+
+//Assert correct id is returned
+assert jsonResp.id == testRunner.testCase.testSuite.getPropertyValue("Id")
+
+
+
+
+
+
+
+</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="907026a7-f16f-48e4-b734-fb9bf4a47955" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Delete" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Create" id="c9f6ab82-d8c2-4042-a459-83cdb1225e64"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>f784c9a7-951e-402b-851f-8d8831112d58</con:targetTestCase><con:properties/><con:returnProperties/><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="calltestcase" name="Assert Created" id="9e025fb5-ee9f-4e0b-b4f0-a28d883e1865"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>46160377-fa2b-4267-8db7-4aa31f4e8757</con:targetTestCase><con:properties/><con:returnProperties/><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Delete" id="7cc53ded-b477-4d94-9ad8-2781ae28541b"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}}/{id}" methodName="Delete" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Delete" id="fc4297a9-3233-4c75-baee-d6fb129c85bd" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="8fec7313-7a3c-4ea1-a446-7c8a55e9ba77" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="70dc9e0c-2fbf-44cb-b68e-e7d7312f35a8" name="Response SLA"><con:configuration><SLA>1000</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestSuite#Id}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="GetById" id="b35d287d-0049-42f7-926e-9349ec847570"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}}/{id}" methodName="GetById" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetById" id="264e557a-2377-406c-bd55-4cb399b8fb7c" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/bfedc82b-296c-415a-bac1-b1691a51bfe6</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="c170debe-1907-48c7-b82c-29be79213eee" name="Valid HTTP Status Codes"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="db021b5e-b6dd-4774-9294-2db5e252abe4" name="Response SLA"><con:configuration><SLA>1000</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestSuite#Id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Try deleting again" id="73ee3140-22ec-478e-8a3d-4bf550353c73"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}}/{id}" methodName="Delete" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Try deleting again" id="fc4297a9-3233-4c75-baee-d6fb129c85bd" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="8fec7313-7a3c-4ea1-a446-7c8a55e9ba77" name="Valid HTTP Status Codes"><con:configuration><codes>500</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="70dc9e0c-2fbf-44cb-b68e-e7d7312f35a8" name="Response SLA"><con:configuration><SLA>1000</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestSuite#Id}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="160cacf1-1f96-4047-b2a7-59e773b599a9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GetAll" searchProperties="true"><con:settings/><con:testStep type="properties" name="Properties" id="42126efd-2c55-4e3a-983b-8d11cb0f22bc"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>Entity1</con:name><con:value>3cb8e4bf-adf5-4022-ba41-7d0364b39856</con:value></con:property><con:property><con:name>Entity2</con:name><con:value>61bd065c-e613-47fb-b821-6430b0e947cf</con:value></con:property><con:property><con:name>Entity3</con:name><con:value>3efcc450-0637-4794-be0a-ccc72ab32842</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="calltestcase" name="Create Entity1" id="be494bcf-13a7-43eb-ad49-a0fa576ba748"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>f784c9a7-951e-402b-851f-8d8831112d58</con:targetTestCase><con:properties/><con:returnProperties/><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer - Entity1" id="7d640edd-f938-45fc-96ea-cc631937dcd2"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>Entity1- Id</con:name><con:sourceType>Id</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>Entity1</con:targetType><con:targetStep>Properties</con:targetStep><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="calltestcase" name="Create Entity2" id="019f2625-1d7a-4ecc-bbbb-ee635a646759"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>f784c9a7-951e-402b-851f-8d8831112d58</con:targetTestCase><con:properties/><con:returnProperties/><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer - Entity2" id="68e6d867-ac0a-4e8c-b37f-aa73eba89f6d"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>Entity1- Id</con:name><con:sourceType>Id</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>Entity2</con:targetType><con:targetStep>Properties</con:targetStep><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="calltestcase" name="Create Entity3" id="dcb490c0-34ae-42cc-8db1-3771b065cbeb"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>f784c9a7-951e-402b-851f-8d8831112d58</con:targetTestCase><con:properties/><con:returnProperties/><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer - Entity3" id="953e98f6-b977-4c4d-be73-fc24855d3fd8"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>Entity1- Id</con:name><con:sourceType>Id</con:sourceType><con:sourceStep>#TestSuite#</con:sourceStep><con:targetType>Entity3</con:targetType><con:targetStep>Properties</con:targetStep><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="restrequest" name="GetAll" id="18ab2def-846e-4c81-b069-7b6f8e2ed0f4"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}" methodName="GetAll" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetAll" id="264e557a-2377-406c-bd55-4cb399b8fb7c" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/bfedc82b-296c-415a-bac1-b1691a51bfe6</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="c170debe-1907-48c7-b82c-29be79213eee" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="db021b5e-b6dd-4774-9294-2db5e252abe4" name="Response SLA"><con:configuration><SLA>1000</SLA></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Assert Fields" id="73eddb84-abe6-425f-82a4-c44a99134e00"><con:settings/><con:config><script>import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.util.regex.Matcher
+
+// get the response where you've the values you want to get
+// using the name of your test step
+def response = context.expand('${GetAll#Response}')
+
+//Parse response
+def jsonResp = new JsonSlurper().parseText(response)
+
+//Assert at least 3 objects in the returned list
+assert jsonResp.size() >= 3
+
+//Assert the 3 inserted entities exists in the returned list
+def entityIds = new String[3]
+entityIds[0] = testRunner.testCase.testSteps["Properties"].getPropertyValue( "Entity1" )
+entityIds[1] = testRunner.testCase.testSteps["Properties"].getPropertyValue( "Entity2" )
+entityIds[2] = testRunner.testCase.testSteps["Properties"].getPropertyValue( "Entity3" )
+
+def idList = [] 
+
+for(item in jsonResp){
+	idList.add(item.id)		
+}
+
+idList = idList.toSet()
+
+assert idList.contains(entityIds[0])
+assert idList.contains(entityIds[1])
+assert idList.contains(entityIds[2])
+
+
+
+
+
+
+
+
+
+
+
+
+</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="56498e5d-802e-436b-a5b2-9f7f9193e55d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="SearchFields" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="Get All Search Fields" id="d2dd4aa0-3562-4509-8206-d82a9d9caecb"><con:settings/><con:config service="http://192.168.2.140:8082" resourcePath="/service/rest/${#Project#ServiceName}/search/fields" methodName="GetSearchFields" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get All Search Fields" id="b37b101a-e01f-463d-853c-eec1f5991228" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://192.168.2.140:8082</con:endpoint><con:request/><con:originalUri>http://192.168.2.140/service/rest/service/search/fields</con:originalUri><con:assertion type="Response SLA Assertion" id="b22a0716-34be-4814-9d0e-5b0efba06441" name="Response SLA"><con:configuration><SLA>1000</SLA></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="3dd6d6b3-95a9-4956-95e8-c519538f2fea" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Assert Fields" id="48ad2e6f-230b-4242-b1f2-6295c9a71d16"><con:settings/><con:config><script>import com.eviware.soapui.settings.SSLSettings
+import com.eviware.soapui.SoapUI
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.util.regex.Matcher
+
+// get the response where you've the values you want to get
+// using the name of your test step
+def response = context.expand('${Get All Search Fields#Response}')
+
+//Parse response
+def jsonResp = new JsonSlurper().parseText(response)
+
+//Assert at least 1 objects in the returned list
+assert jsonResp.size() == 1
+
+//Assert expected fields
+def idList = jsonResp.toSet() 
+idList = jsonResp.toSet()
+
+assert idList.contains("name")
+</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="dfebcb79-2536-4018-bd01-722735e63218" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Filtered List" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:properties><con:property><con:name>Id</con:name><con:value>3efcc450-0637-4794-be0a-ccc72ab32842</con:value></con:property><con:property><con:name>UpdatedName</con:name><con:value>ad34e5d2-6fc1-402f-9914-d5843d00639a</con:value></con:property><con:property><con:name>name</con:name><con:value/></con:property></con:properties></con:testSuite><con:properties><con:property><con:name>ServiceName</con:name><con:value>service</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

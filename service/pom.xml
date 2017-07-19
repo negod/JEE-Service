@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- Add the following to your settings.xml 
+       
+    <profiles>
+       <profile>
+            <id>appserver-settings</id>
+            <properties>
+                <appserver.username>YOUR_USERNAME</appserver.username>
+                <appserver.password>YOUR_PASSWORD</appserver.password>
+                <appserver.hostname>IP_TO_APPSERVER</appserver.hostname>
+                <appserver.port>APPSERVER_APPLICATION_PORT</appserver.port>
+                <appserver.managementport>APPSERVER_MANAGEMENT_PORT</appserver.managementport>
+            </properties>
+        </profile>                   
+    </profiles>
+    
+    <activeProfiles>
+        <activeProfile>appserver-settings</activeProfile>
+    </activeProfiles>
+    
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <parent>
+        <groupId>se.backede.archetype</groupId>
+        <artifactId>jee-archetype</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>service</artifactId>
+    <packaging>war</packaging>
+
+    <name>service</name>
+    
+    <properties>
+
+        <!-- JPA DEPENDENCIES-->
+        <hibernate.core.version>5.1.0.Final</hibernate.core.version>
+        <hibernate.validator.version>5.2.4.Final</hibernate.validator.version>
+        <hibernate.search.version>5.5.3.Final</hibernate.search.version>
+        <hibernate.search.infispan.version>5.5.2.Final</hibernate.search.infispan.version>
+        
+        <!-- LOGGING configuration -->
+        <application.name>${project.artifactId}</application.name>
+        <application.version>${project.version}</application.version>
+        <application.logfile>/app/logs/${project.artifactId}/${project.artifactId}.log</application.logfile>
+        <application.error.logfile>/app/logs/${project.artifactId}/${project.artifactId}-error.log</application.error.logfile>
+        
+        <!-- JTA settings -->
+        <hibernate.transaction.jta.platform>org.hibernate.service.jta.platform.internal.SunOneJtaPlatform</hibernate.transaction.jta.platform>
+        <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
+        
+    </properties>
+    
+    <dependencies>
+        
+        <!-- Commons -->
+        <dependency>
+            <groupId>se.backede.generics</groupId>
+            <artifactId>persistence</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>se.backede.generics</groupId>
+            <artifactId>webservice</artifactId>
+            <version>1.1</version>
+        </dependency>
+        
+        <!-- JPA provider -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.core.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- for JPA, use hibernate-entitymanager instead of hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.core.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate.core.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-orm</artifactId>
+            <version>${hibernate.search.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-infinispan</artifactId>
+            <version>${hibernate.search.infispan.version}</version>    
+            <scope>provided</scope>   
+        </dependency>      
+        
+        <!-- JAVAEE -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.1.4</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+      
+        <!-- REST API generation -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        
+    </dependencies>
+    
+    <profiles>
+        <profile>
+            <activation>
+                <property>
+                    <name>init</name>
+                    <value>mysql</value>
+                </property>
+            </activation>
+            <id>mysql</id>
+            <properties>
+                <hibernate.transaction.jta.platform>org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform</hibernate.transaction.jta.platform>
+                <hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</hibernate.dialect>
+            </properties>
+        </profile>
+        
+        <!-- DEPLOY TO WILDFLY APPSERVER -->
+        <!-- mvn -Pwildfly:deploy -Dhostname=localhost -Dport=10000 -Dpassword=admin -Dusername=admin -->
+        <profile>
+            <id>wildfly-deploy</id>
+            <activation>
+                <property>
+                    <name>init</name>
+                </property>
+            </activation>
+            <build>
+                <defaultGoal>wildfly:deploy</defaultGoal>   
+                <plugins>	
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <version>1.1.0.Final</version>
+                        <configuration>
+                            <filename>${project.build.finalName}.${project.packaging}</filename>
+                            <targetDir>${project.build.directory}</targetDir>
+                            <hostname>${appserver.hostname}</hostname>
+                            <port>${appserver.managementport}</port>
+                            <username>${appserver.username}</username>
+                            <password>${appserver.password}</password>
+                            <force>true</force>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>  
+        
+        <!-- GENERATE HIBERNATE JPA MODEL FOR CRITERIA QUERIES FROM ENTITITES ( Use maven command below ) -->
+        <!-- mvn clean install -Pgenerate-jpa-model -->
+        <profile>
+            
+            <activation>
+                <property>
+                    <name>init</name>
+                </property>
+            </activation>
+            
+            <id>generate-jpa-model</id>
+            <build>
+                <plugins>	
+                    <plugin>
+                        <groupId>org.bsc.maven</groupId>
+                        <artifactId>maven-processor-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>process</id>
+                                <goals>
+                                    <goal>process</goal>
+                                </goals>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <processors>
+                                        <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+                                    </processors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>        
+                                <groupId>org.hibernate</groupId>
+                                <artifactId>hibernate-jpamodelgen</artifactId>
+                                <version>4.3.4.Final</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
+        <!-- GENERATE PROPERTIES FILE USED FOR LOGGBACK (logging.properties)-->
+        <!-- mvn clean install -Pgenerate-properties -->
+        <profile>
+            
+            <activation>
+                <property>
+                    <name>init</name>
+                </property>
+            </activation>
+            
+            <id>generate-properties</id>
+            <build>
+                <plugins>	
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>properties-maven-plugin</artifactId>
+                        <version>1.0.0</version>
+                        <executions>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>write-project-properties</goal>
+                                </goals>
+                                <configuration>
+                                    <outputFile>${basedir}/src/main/resources/logging.properties</outputFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>  
+        
+        <!-- GENERATE SWAGGER REST API DOCUMENTATION -->
+        <!-- mvn clean install -Pgenerate-swagger -Dswagger.hostname=localhost -Dswagger.port=8080 -->
+        <!-- mvn clean install -Pgenerate-swagger -->
+        <profile>
+            
+            <activation>
+                <property>
+                    <name>init</name>
+                </property>
+            </activation>
+            
+            <id>generate-swagger</id>
+            <build>
+                <plugins>	
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>generate-service-docs</id>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <doclet>com.carma.swagger.doclet.ServiceDoclet</doclet>
+                                    <docletArtifact>
+                                        <groupId>com.carma</groupId>
+                                        <artifactId>swagger-doclet</artifactId>
+                                        <version>1.1.2</version>
+                                    </docletArtifact>
+                                    <reportOutputDirectory>src/main/webapp</reportOutputDirectory>
+                                    <useStandardDocletOptions>false</useStandardDocletOptions>
+                                    <additionalparam>
+                                        -apiVersion ${project.version}
+                                        -docBasePath http://${appserver.hostname}:${appserver.port}/${project.artifactId}/apidocs
+                                        -apiBasePath http://${appserver.hostname}:${appserver.port}/${project.artifactId}/rest
+                                    </additionalparam>
+                                </configuration>
+                                <goals>
+                                    <goal>javadoc</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>  
+                          
+    </profiles>
+
+    <build>
+        <plugins>
+            
+            <!-- WAR PLUGIN -->
+            <!-- Dynamicly set params in *.xml in WEB-INF from logging.proprties file -->
+            <!-- Profile "generate-properties" must have run before this works -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>war</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/resources/WEB-INF</directory>
+                                    <filtering>true</filtering>
+                                    <targetPath>WEB-INF</targetPath>
+                                </resource>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/resources/META-INF</directory>
+                                    <filtering>true</filtering>
+                                    <targetPath>META-INF</targetPath>
+                                </resource>
+                            </webResources>
+                            <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                            <filters>
+                                <filter>${basedir}/src/main/resources/logging.properties</filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- DEPENDENCY PLUGIN -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>7.0</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <!-- RESOUCE FILTERING -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        
+    </build>
+    
+</project>

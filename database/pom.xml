@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+
+<!-- LIQUIBASE COMMANDS --> 
+
+    <!-- UPDATE                   - mvn liquibase:update -P mysql -->
+    <!-- ROLLBACK TO SPECIFIC TAG - mvn liquibase:rollback -P mysql -Dliquibase.rollbackTag=version_0.1 -->
+    <!-- ROLLBACK NUMBER OF STEPS - mvn liquibase:rollback -P mysql -Dliquibase.rollbackCount=1 -->
+    <!-- CHECK STATUS OF DB       - mvn liquibase:status -P mysql -->
+    <!-- CREATE CHANGESET         - mvn liquibase:generateChangeLog -P mysql -->
+    <!-- DROP ALL TABLES AND DATA - mvn liquibase:dropAll -P mysql -->
+    
+    <!-- Add the following to your settings.xml 
+       
+    <profiles>
+       <profile>
+            <id>db-settings-mysql</id>
+            <properties>
+                <dbserver.user>YOUR_USER</dbserver.user>
+                <dbserver.passwd>YOUR_PASSWORD</dbserver.passwd>
+                <dbserver.hostname>SERVER_IP</dbserver.hostname>
+                <dbserver.port>SERVER_PORT</dbserver.port>
+            </properties>
+        </profile>                
+    </profiles>
+    
+    <activeProfiles>
+        <activeProfile>db-settings-mysql</activeProfile>
+    </activeProfiles>
+    
+-->
+    
+<!-- Set the defalut schema in parent POM in tag <dbserver.dbName> -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>se.backede.archetype</groupId>
+        <artifactId>jee-archetype</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>database</artifactId>
+    <name>database</name>
+  
+    <properties>
+        <db.changeLogFile>changelog/db-changelog-master.xml</db.changeLogFile>
+        <db.outputFile>changelog/generatedChangelog.xml</db.outputFile>
+        <db.defaultSchema>${dbserver.dbName}</db.defaultSchema>
+        <liquibase.maven-plugin.version>3.3.2</liquibase.maven-plugin.version>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1201-jdbc41</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase.ext</groupId>
+            <artifactId>liquibase-hibernate4</artifactId>
+            <version>3.5</version>
+        </dependency>
+    </dependencies>
+
+    <!-- The reaseon for duplicate <build> tag for each profile is so that they can be run from parent pom -->    	
+    <!-- Postgres -->
+    <!-- For init of database run: mvn -Dinit:postgres -->
+    <profiles>
+        <profile>
+            <id>postgres</id>
+            <activation>
+                <property>
+                    <name>db</name>
+                    <value>postges</value>
+                </property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <db.driver>org.postgresql.Driver</db.driver>
+                <db.url>jdbc:postgresql://${dbserver.hostname}:${dbserver.port}/${dbserver.dbName}</db.url>
+                <username>${dbserver.user}</username>
+                <password>${dbserver.passwd}</password>
+                <db.defaultSchema>${dbserver.dbName}</db.defaultSchema>
+            </properties>
+            <build>
+                <defaultGoal>liquibase:update</defaultGoal>         
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <version>${liquibase.maven-plugin.version}</version>
+                        <configuration>
+                            <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                            <changeLogFile>${db.changeLogFile}</changeLogFile>
+                            <driver>${db.driver}</driver>
+                            <url>${dbserver.url}</url>
+                            <username>${dbserver.user}</username>
+                            <password>${dbserver.passwd}</password>
+                            <defaultSchemaName>${db.defaultSchema}</defaultSchemaName>
+                            <outputChangeLogFile>${db.outputFile}</outputChangeLogFile>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>update</goal>
+                                </goals>
+                            </execution>
+                        </executions> 
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.5.3</version>
+                        <configuration>
+                            <descriptor>src/assembly/liquibase_assembly.xml</descriptor>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
+        <!-- MYSQL -->
+        <!-- For init of database run: mvn -Dinit:mysql -->
+        <profile>
+            <id>mysql</id>
+            <activation>
+                <property>
+                    <name>init</name>
+                    <value>mysql</value>
+                </property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <db.driver>com.mysql.jdbc.Driver</db.driver>
+                <dbserver.url>jdbc:mysql://${dbserver.hostname}:${dbserver.port}/${dbserver.dbName}</dbserver.url>
+                <username>${dbserver.user}</username>
+                <password>${dbserver.passwd}</password>
+                <db.defaultSchema>${dbserver.dbName}</db.defaultSchema>
+            </properties>
+            <build>
+                <defaultGoal>liquibase:update</defaultGoal>         
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <version>3.3.2</version>
+                        <configuration>
+                            <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                            <changeLogFile>${db.changeLogFile}</changeLogFile>
+                            <driver>${db.driver}</driver>
+                            <url>${dbserver.url}</url>
+                            <username>${dbserver.user}</username>
+                            <password>${dbserver.passwd}</password>
+                            <defaultSchemaName>${db.defaultSchema}</defaultSchemaName>
+                            <outputChangeLogFile>${db.outputFile}</outputChangeLogFile>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>update</goal>
+                                </goals>
+                            </execution>
+                        </executions> 
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.5.3</version>
+                        <configuration>
+                            <descriptor>src/assembly/liquibase_assembly.xml</descriptor>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    <changeLogFile>${db.changeLogFile}</changeLogFile>
+                    <driver>${db.driver}</driver>
+                    <url>${dbserver.url}</url>
+                    <username>${dbserver.user}</username>
+                    <password>${dbserver.passwd}</password>
+                    <defaultSchemaName>${db.defaultSchema}</defaultSchemaName>
+                    <outputChangeLogFile>${db.outputFile}</outputChangeLogFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions> 
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <descriptor>src/assembly/liquibase_assembly.xml</descriptor>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
