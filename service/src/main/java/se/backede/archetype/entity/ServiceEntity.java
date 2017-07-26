@@ -1,8 +1,10 @@
 package se.backede.archetype.entity;
 
 import com.negod.generics.persistence.entity.GenericEntity;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +14,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.search.annotations.Analyze;
@@ -39,7 +45,10 @@ import org.hibernate.search.annotations.TokenizerDef;
 @Entity
 @XmlRootElement(name = "service")
 @XmlAccessorType(XmlAccessType.NONE)
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true) 
 @Indexed
 @AnalyzerDef(name = "service_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
@@ -56,7 +65,7 @@ public class ServiceEntity extends GenericEntity {
 
     @XmlElement
     @IndexedEmbedded
-    @OneToOne(mappedBy = "service", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "service", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ServiceDetailEntity serviceDetail;
 
     @XmlElement
@@ -74,5 +83,16 @@ public class ServiceEntity extends GenericEntity {
                 @JoinColumn(name = "user_id")})
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserEntity> users = new HashSet<>();
+
+    //For OneToOne relation
+    @PrePersist
+    @Override
+    protected void onCreate() {
+        super.setUpdatedDate(new Date());
+        super.setId(UUID.randomUUID().toString());
+        serviceDetail.setId(super.getId());
+        serviceDetail.setUpdatedDate(super.getUpdatedDate());
+        serviceDetail.setService(this);
+    }
 
 }

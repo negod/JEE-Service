@@ -6,11 +6,15 @@
 package se.backede.archetype.entity;
 
 import com.negod.generics.persistence.entity.GenericEntity;
+import java.util.Date;
+import java.util.UUID;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,6 +22,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.search.annotations.Analyze;
@@ -40,7 +47,8 @@ import org.hibernate.search.annotations.TokenizerDef;
 @Entity
 @XmlRootElement(name = "service_detail")
 @XmlAccessorType(XmlAccessType.NONE)
-@Data
+@Getter
+@Setter
 @Indexed
 @AnalyzerDef(name = "service_detail_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
@@ -56,9 +64,17 @@ public class ServiceDetailEntity extends GenericEntity {
     private String name;
 
     @IndexedEmbedded(depth = 1)
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @PrimaryKeyJoinColumn
     @ContainedIn
     private ServiceEntity service;
+
+    @PrePersist
+    @Override
+    protected void onCreate() {
+        if (service != null) {
+            super.setId(service.getId());
+        }
+    }
 
 }
