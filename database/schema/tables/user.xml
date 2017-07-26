@@ -11,11 +11,12 @@
     <changeSet author="authorName" id="Create ManyToOne Table">
 
         <createTable tableName="USER" remarks="Table handling Service Users" >
-            <column name="id" type="bigint" remarks="Primary key" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="user_pk"/>
+            
+            <column name="internalId" type="bigint" autoIncrement="true">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="extId" type="varchar(36)" remarks="Id that can be used extarnally">
-                <constraints nullable="false"/>
+            <column name="id" type="varchar(36)" remarks="Id that can be used extarnally">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_pk"/>
             </column>
             <column name="updatedDate" type="timestamp" remarks="Last updated date time.">
                 <constraints nullable="false"/>

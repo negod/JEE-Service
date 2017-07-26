@@ -6,26 +6,26 @@
     <changeSet id="Domain_init_data" author="author">	
 
         <insert tableName="USER">
-            <column name="id" value="1"/>
-            <column name="extId" value="272f878d-4a36-4e1d-8fcb-bdaf1a97de38"/>
+            <column name="internalId" value="1"/>
+            <column name="id" value="272f878d-4a36-4e1d-8fcb-bdaf1a97de38"/>
             <column name="name" value="User1"/>
             <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="USER">
-            <column name="id" value="2"/>
-            <column name="extId" value="ddf68311-4408-4a31-98f3-379b2c996acc"/>
+            <column name="internalId" value="2"/>
+            <column name="id" value="ddf68311-4408-4a31-98f3-379b2c996acc"/>
             <column name="name" value="User2"/>
             <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="USER">
-            <column name="id" value="3"/>
-            <column name="extId" value="36ff0ac3-e0ad-4822-a835-3728c33fe214"/>
+            <column name="internalId" value="3"/>
+            <column name="id" value="36ff0ac3-e0ad-4822-a835-3728c33fe214"/>
             <column name="name" value="User3"/>
             <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
         <insert tableName="USER">
-            <column name="id" value="4"/>
-            <column name="extId" value="372a6049-a1d9-4525-8b4a-01b490ac0c4c"/>
+            <column name="internalId" value="4"/>
+            <column name="id" value="372a6049-a1d9-4525-8b4a-01b490ac0c4c"/>
             <column name="name" value="User4"/>
             <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
@@ -33,7 +33,11 @@
         <rollback>
             <delete tableName="Domain">
                 <where>
-                    id in(1,2,3,4)
+                    id in(
+                    272f878d-4a36-4e1d-8fcb-bdaf1a97de38,
+                    ddf68311-4408-4a31-98f3-379b2c996acc,
+                    36ff0ac3-e0ad-4822-a835-3728c33fe214,
+                    372a6049-a1d9-4525-8b4a-01b490ac0c4c)
                 </where>
             </delete>
         </rollback>

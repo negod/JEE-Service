@@ -6,38 +6,42 @@
     <changeSet id="SERVICE_USER_init_data" author="author">	
 
         <insert tableName="SERVICE_USER">
-            <column name="id" value="1"/>
-            <column name="extId" value="71d42f46-cd2a-419d-bfcf-27b21ded1487"/>
+            <column name="internalId" value="1"/>
+            <column name="id" value="dfcd4bf4-43b3-48f3-b121-be41b4d30263"/>
             <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
-            <column name="service_id" value="1"/>
-            <column name="user_id" value="1"/>
+            <column name="service_id" value="71d42f46-cd2a-419d-bfcf-27b21ded1487"/>
+            <column name="user_id" value="272f878d-4a36-4e1d-8fcb-bdaf1a97de38"/>
         </insert>
         <insert tableName="SERVICE_USER">
-            <column name="id" value="2"/>
-            <column name="extId" value="8f855b22-d41b-4c9b-bfe7-29e1e3cc8f1"/>
+            <column name="internalId" value="2"/>
+            <column name="id" value="8f855b22-d41b-4c9b-bfe7-29e1e3cc8f1"/>
             <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
-            <column name="service_id" value="1"/>
-            <column name="user_id" value="2"/>
+            <column name="service_id" value="71d42f46-cd2a-419d-bfcf-27b21ded1487"/>
+            <column name="user_id" value="ddf68311-4408-4a31-98f3-379b2c996acc"/>
         </insert>
         <insert tableName="SERVICE_USER">
-            <column name="id" value="3"/>
-            <column name="extId" value="ee765a66-b9c1-49b2-a601-aea9f334f935"/>
+            <column name="internalId" value="3"/>
+            <column name="id" value="ee765a66-b9c1-49b2-a601-aea9f334f935"/>
             <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
-            <column name="service_id" value="3"/>
-            <column name="user_id" value="4"/>
+            <column name="service_id" value="e3840b99-bc19-4711-8da9-e8818fd8aeb6"/>
+            <column name="user_id" value="372a6049-a1d9-4525-8b4a-01b490ac0c4c"/>
         </insert>
         <insert tableName="SERVICE_USER">
-            <column name="id" value="4"/>
-            <column name="extId" value="e3840b99-bc19-4711-8da9-e8818fd8aeb6"/>
+            <column name="internalId" value="4"/>
+            <column name="id" value="e3840b99-bc19-4711-8da9-e8818fd8aeb6"/>
             <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
-            <column name="service_id" value="2"/>
-            <column name="user_id" value="3"/>
+            <column name="service_id" value="8f855b22-d41b-4c9b-bfe7-29e1e3cc8f1"/>
+            <column name="user_id" value="36ff0ac3-e0ad-4822-a835-3728c33fe214"/>
         </insert>
     
         <rollback>
             <delete tableName="SERVICE_USER">
                 <where>
-                    id in(1,2,3,4)
+                    id in(
+                    71d42f46-cd2a-419d-bfcf-27b21ded1487,
+                    8f855b22-d41b-4c9b-bfe7-29e1e3cc8f1,
+                    ee765a66-b9c1-49b2-a601-aea9f334f935,
+                    e3840b99-bc19-4711-8da9-e8818fd8aeb6)
                 </where>
             </delete>
         </rollback>

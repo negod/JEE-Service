@@ -11,11 +11,12 @@
     <changeSet author="authorName" id="Create Service Table">
         
         <createTable tableName="SERVICE" remarks="Table handling Service" >
-            <column name="id" type="bigint" remarks="Primary key" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="Service_pk"/>
+            
+            <column name="internalId" type="bigint" autoIncrement="true">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="extId" type="varchar(36)" remarks="Id that can be used extarnally">
-                <constraints nullable="false"/>
+            <column name="id" type="varchar(36)" remarks="Id that can be used extarnally">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="Service_pk"/>
             </column>
             <column name="updatedDate" type="timestamp" remarks="Last updated date time.">
                 <constraints nullable="false"/>
@@ -26,7 +27,7 @@
             </column>
             
             <!-- ManyToOne Example -->
-            <column name="domain_id" type="bigint" remarks="Referens till Domain"/>
+            <column name="domain_id" type="varchar(36)" remarks="Referens till Domain"/>
                 
         </createTable>               
         

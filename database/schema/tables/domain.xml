@@ -11,11 +11,11 @@
     <changeSet author="authorName" id="Create Domain Table">
 
         <createTable tableName="DOMAIN" remarks="Table DOMAIN example" >
-            <column name="id" type="bigint" remarks="Primary key" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="domain_pk"/>
+            <column name="internalId" type="bigint" autoIncrement="true">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="extId" type="varchar(36)" remarks="Id that can be used extarnally">
-                <constraints nullable="false"/>
+            <column name="id" type="varchar(36)" remarks="Id that can be used extarnally">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="domain_pk"/>
             </column>
             <column name="updatedDate" type="timestamp" remarks="Last updated date time.">
                 <constraints nullable="false"/>
