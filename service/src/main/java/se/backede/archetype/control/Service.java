@@ -27,7 +27,7 @@ import se.backede.webservice.service.GenericRestService;
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
 @Slf4j
-@Path("/service")
+@Path("/service-parent")
 @Stateless
 public class Service extends GenericRestService<ServiceEntity> {
 

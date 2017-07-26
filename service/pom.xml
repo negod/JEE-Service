@@ -23,7 +23,7 @@
     
     <parent>
         <groupId>se.backede.archetype</groupId>
-        <artifactId>jee-archetype</artifactId>
+        <artifactId>service-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     
@@ -52,6 +52,10 @@
         <hibernate.transaction.jta.platform>org.hibernate.service.jta.platform.internal.SunOneJtaPlatform</hibernate.transaction.jta.platform>
         <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
         
+        <!-- Backede libs -->
+        <persistence.version>1.2</persistence.version>
+        <webservice.version>1.1</webservice.version>
+        
     </properties>
     
     <dependencies>
@@ -60,12 +64,12 @@
         <dependency>
             <groupId>se.backede.generics</groupId>
             <artifactId>persistence</artifactId>
-            <version>1.1</version>
+            <version>${persistence.version}</version>
         </dependency>
         <dependency>
             <groupId>se.backede.generics</groupId>
             <artifactId>webservice</artifactId>
-            <version>1.1</version>
+            <version>${webservice.version}</version>
         </dependency>
         
         <!-- JPA provider -->
@@ -377,8 +381,25 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- generate properties file -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${basedir}/src/main/resources/app.properties</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-
+        
         <!-- RESOUCE FILTERING -->
         <resources>
             <resource>

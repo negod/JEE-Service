@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>se.backede</groupId>
-        <artifactId>parent</artifactId>
-        <version>1.6</version>
+        <groupId>se.backede.parent</groupId>
+        <artifactId>webservice-parent</artifactId>
+        <version>1.0</version>
     </parent>
 
     <groupId>se.backede.archetype</groupId>
-    <artifactId>jee-archetype</artifactId>
+    <artifactId>service-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
@@ -18,12 +18,8 @@
     <!-- to initialize project: mvn -Dinit=mysql -->
     
     <properties>
-        <!-- APP Server URL -->
-        <appserver.hostname>192.168.2.140</appserver.hostname>
-        <appserver.port>8082</appserver.port>
-        <!-- DB Server URL -->
-        <!--dbserver.hostname>192.168.2.140</dbserver.hostname-->
-        <!--dbserver.port>3306</dbserver.port-->
+        <!-- IMPORTANT!! Set properties in your settings.xml => See database and service POM.xml for more instructions -->
+        <!-- DB Default schema -->
         <dbserver.dbName>dev</dbserver.dbName>
     </properties>
 

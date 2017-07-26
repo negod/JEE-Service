@@ -1,17 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package se.backede.archetype.entity;
 
 import com.negod.generics.persistence.entity.GenericEntity;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -33,43 +32,29 @@ import org.hibernate.search.annotations.TokenizerDef;
 
 /**
  *
- * @author joakim.backede@outlook.com
+ * @author Joakim Backede ( joakim.backede@outlook.com )
  */
-@Table(name = "SERVICE")
+@Table(name = "USER")
 @Entity
-@XmlRootElement(name = "service")
+@XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
 @Data
 @Indexed
-@AnalyzerDef(name = "service_customanalyzer",
+@AnalyzerDef(name = "user_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
             @TokenFilterDef(factory = LowerCaseFilterFactory.class)
         })
-public class ServiceEntity extends GenericEntity {
+public class UserEntity extends GenericEntity {
 
-    @Analyzer(definition = "service_customanalyzer")
+    @Analyzer(definition = "user_customanalyzer")
     @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
     @Column(name = "name", insertable = true, unique = true)
     @XmlElement
     private String name;
 
-    @IndexedEmbedded
-    @OneToOne(mappedBy = "service", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ServiceDetailEntity serviceDetail;
-
-    @IndexedEmbedded
-    @JoinColumn(name = "domain_id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private DomainEntity domain;
-
-    @IndexedEmbedded
-    @JoinTable(name = "SERVICE_USER",
-            joinColumns = {
-                @JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "user_id")})
-    @ManyToMany
-    private Set<UserEntity> users = new HashSet<>();
+    @IndexedEmbedded(depth = 1)
+    @ManyToMany(mappedBy = "users")
+    private Set<ServiceEntity> services = new HashSet<>();
 
 }

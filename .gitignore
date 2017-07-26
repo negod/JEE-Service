@@ -39,3 +39,4 @@ Service_Test-Create-Create-0-FAILED.txt
 /database/nbactions-mysql.xml
 /service/src/main/resources/app.properties
 /service/src/main/resources/logging.properties
+/service/target/
