@@ -54,22 +54,25 @@ public class ServiceEntity extends GenericEntity {
     @XmlElement
     private String name;
 
+    @XmlElement
     @IndexedEmbedded
-    @OneToOne(mappedBy = "service", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "service", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ServiceDetailEntity serviceDetail;
 
+    @XmlElement
     @IndexedEmbedded
     @JoinColumn(name = "domain_id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private DomainEntity domain;
 
+    @XmlElement
     @IndexedEmbedded
     @JoinTable(name = "SERVICE_USER",
             joinColumns = {
-                @JoinColumn(name = "employee_id")},
+                @JoinColumn(name = "service_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "user_id")})
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserEntity> users = new HashSet<>();
 
 }

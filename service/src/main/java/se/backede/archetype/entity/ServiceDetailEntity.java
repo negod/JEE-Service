@@ -50,9 +50,9 @@ public class ServiceDetailEntity extends GenericEntity {
 
     @Analyzer(definition = "service_detail_customanalyzer")
     @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
-    @Column(name = "detail", insertable = true, unique = true)
+    @Column(name = "name", insertable = true, unique = true)
     @XmlElement
-    private String detail;
+    private String name;
 
     @IndexedEmbedded(depth = 1)
     @OneToOne

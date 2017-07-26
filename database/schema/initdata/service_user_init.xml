@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="SERVICE_USER_init_data" author="author">	
+
+        <insert tableName="SERVICE_USER">
+            <column name="id" value="1"/>
+            <column name="extId" value="71d42f46-cd2a-419d-bfcf-27b21ded1487"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="service_id" value="1"/>
+            <column name="user_id" value="1"/>
+        </insert>
+        <insert tableName="SERVICE_USER">
+            <column name="id" value="2"/>
+            <column name="extId" value="8f855b22-d41b-4c9b-bfe7-29e1e3cc8f1"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="service_id" value="1"/>
+            <column name="user_id" value="2"/>
+        </insert>
+        <insert tableName="SERVICE_USER">
+            <column name="id" value="3"/>
+            <column name="extId" value="ee765a66-b9c1-49b2-a601-aea9f334f935"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="service_id" value="3"/>
+            <column name="user_id" value="4"/>
+        </insert>
+        <insert tableName="SERVICE_USER">
+            <column name="id" value="4"/>
+            <column name="extId" value="e3840b99-bc19-4711-8da9-e8818fd8aeb6"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="service_id" value="2"/>
+            <column name="user_id" value="3"/>
+        </insert>
+    
+        <rollback>
+            <delete tableName="SERVICE_USER">
+                <where>
+                    id in(1,2,3,4)
+                </where>
+            </delete>
+        </rollback>
+
+    </changeSet>
+   
+</databaseChangeLog>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="Domain_init_data" author="author">	
+
+        <insert tableName="USER">
+            <column name="id" value="1"/>
+            <column name="extId" value="272f878d-4a36-4e1d-8fcb-bdaf1a97de38"/>
+            <column name="name" value="User1"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="USER">
+            <column name="id" value="2"/>
+            <column name="extId" value="ddf68311-4408-4a31-98f3-379b2c996acc"/>
+            <column name="name" value="User2"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="USER">
+            <column name="id" value="3"/>
+            <column name="extId" value="36ff0ac3-e0ad-4822-a835-3728c33fe214"/>
+            <column name="name" value="User3"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="USER">
+            <column name="id" value="4"/>
+            <column name="extId" value="372a6049-a1d9-4525-8b4a-01b490ac0c4c"/>
+            <column name="name" value="User4"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+    
+        <rollback>
+            <delete tableName="Domain">
+                <where>
+                    id in(1,2,3,4)
+                </where>
+            </delete>
+        </rollback>
+
+    </changeSet>
+   
+</databaseChangeLog>

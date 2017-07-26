@@ -5,7 +5,18 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="\schema\tables\serviceEntity.xml"/>
-    <include file="\schema\initdata\serviceEntity_init.xml"/>
+    <!-- tables -->
+    <include file="\schema\tables\domain.xml"/>
+    <include file="\schema\tables\service.xml"/>
+    <include file="\schema\tables\user.xml"/>
+    <include file="\schema\tables\service_detail.xml"/>
+    <include file="\schema\tables\service_user.xml"/>
+    
+    <!-- Initdata -->
+    <include file="\schema\initdata\domain_init.xml"/>
+    <include file="\schema\initdata\service_init.xml"/>
+    <include file="\schema\initdata\user_init.xml"/>
+    <include file="\schema\initdata\service_detail_init.xml"/>
+    <include file="\schema\initdata\service_user_init.xml"/>
 	
 </databaseChangeLog>

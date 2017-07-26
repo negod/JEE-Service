@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="SERVICE_DETAIL_deatil_init_data" author="author">	
+
+        <insert tableName="SERVICE_DETAIL">
+            <column name="id" value="1"/>
+            <column name="extId" value="4c4a19ba-eb3c-4103-b637-b01270d78574"/>
+            <column name="name" value="SERVICE_DETAIL1"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="SERVICE_DETAIL">
+            <column name="id" value="2"/>
+            <column name="extId" value="7d274070-9515-47d0-ba4e-c7890511a183"/>
+            <column name="name" value="SERVICE_DETAIL2"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="SERVICE_DETAIL">
+            <column name="id" value="3"/>
+            <column name="extId" value="bbc7e538-3573-4476-873c-463009a6f2bf"/>
+            <column name="name" value="SERVICE_DETAIL3"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="SERVICE_DETAIL">
+            <column name="id" value="4"/>
+            <column name="extId" value="90e755c2-90f5-4b06-a57a-f2aaefcf0319"/>
+            <column name="name" value="SERVICE_DETAIL4"/>
+            <column name="updatedDate" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+    
+        <rollback>
+            <delete tableName="SERVICE_DETAIL">
+                <where>
+                    id in(1,2,3,4)
+                </where>
+            </delete>
+        </rollback>
+
+    </changeSet>
+   
+</databaseChangeLog>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xi="http://www.w3.org/2001/XInclude"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext 
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+                        http://www.liquibase.org/xml/ns/dbchangelog 
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet author="authorName" id="Create SERVICE_DETAIL Table">
+
+        <createTable tableName="SERVICE_DETAIL" remarks="Table handling service details" >
+            <column name="id" type="bigint" remarks="Primary key" autoIncrement="false">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="service_detail_pk"/>
+            </column>
+            <column name="extId" type="varchar(36)" remarks="Id that can be used extarnally">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updatedDate" type="timestamp" remarks="Last updated date time.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)" remarks="A detail">            
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <!-- OneToOne Example -->
+        <addForeignKeyConstraint baseColumnNames="id"
+                                 baseTableName="SERVICE_DETAIL"
+                                 constraintName="servicedetail_service_fk"                                 
+                                 referencedColumnNames="id"
+                                 referencedTableName="SERVICE"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+
+        <rollback>
+            <dropTable tableName="SERVICE_DETAIL" cascadeConstraints="true" />
+        </rollback>
+        
+    </changeSet>
+
+</databaseChangeLog>

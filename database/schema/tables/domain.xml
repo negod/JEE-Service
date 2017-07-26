@@ -8,11 +8,11 @@
                         http://www.liquibase.org/xml/ns/dbchangelog 
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet author="authorName" id="Create ServiceEntity Table">
+    <changeSet author="authorName" id="Create Domain Table">
 
-        <createTable tableName="ServiceEntity" remarks="Table handling ServiceEntitys" >
+        <createTable tableName="DOMAIN" remarks="Table DOMAIN example" >
             <column name="id" type="bigint" remarks="Primary key" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="ServiceEntity_pk"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="domain_pk"/>
             </column>
             <column name="extId" type="varchar(36)" remarks="Id that can be used extarnally">
                 <constraints nullable="false"/>
@@ -20,13 +20,13 @@
             <column name="updatedDate" type="timestamp" remarks="Last updated date time.">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="varchar(36)" remarks="A name for the ServiceEntity">
+            <column name="name" type="varchar(36)" remarks="A name for the OneToOne table">
                 <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
 
         <rollback>
-            <dropTable tableName="ServiceEntity" cascadeConstraints="true" />
+            <dropTable tableName="DOMAIN" cascadeConstraints="true" />
         </rollback>
         
     </changeSet>
