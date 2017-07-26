@@ -8,6 +8,7 @@ package se.backede.archetype.entity;
 import com.negod.generics.persistence.entity.GenericEntity;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -22,6 +23,7 @@ import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
@@ -53,8 +55,9 @@ public class UserEntity extends GenericEntity {
     @XmlElement
     private String name;
 
+    @ContainedIn
     @IndexedEmbedded(depth = 1)
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<ServiceEntity> services = new HashSet<>();
 
 }

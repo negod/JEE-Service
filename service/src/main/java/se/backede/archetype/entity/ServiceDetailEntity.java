@@ -23,6 +23,7 @@ import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
@@ -57,6 +58,7 @@ public class ServiceDetailEntity extends GenericEntity {
     @IndexedEmbedded(depth = 1)
     @OneToOne
     @PrimaryKeyJoinColumn
+    @ContainedIn
     private ServiceEntity service;
 
 }

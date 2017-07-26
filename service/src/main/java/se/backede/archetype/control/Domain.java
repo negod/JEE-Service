@@ -1,12 +1,12 @@
-/**
- * Do not forget to rename the @responseType to the actual entityclass for each required method
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package se.backede.archetype.control;
 
 import com.negod.generics.persistence.GenericDao;
 import com.negod.generics.persistence.search.GenericFilter;
-import se.backede.archetype.boundary.ServiceDao;
-import se.backede.archetype.entity.ServiceEntity;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -20,6 +20,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
+import se.backede.archetype.boundary.DomainDao;
+import se.backede.archetype.entity.DomainEntity;
+import se.backede.archetype.entity.ServiceEntity;
 import se.backede.webservice.service.GenericRestService;
 
 /**
@@ -27,12 +30,12 @@ import se.backede.webservice.service.GenericRestService;
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
 @Slf4j
-@Path("/service-parent")
+@Path("/domain")
 @Stateless
-public class Service extends GenericRestService<ServiceEntity> {
-
-    @EJB
-    ServiceDao dao;
+public class Domain extends GenericRestService<DomainEntity>{
+    
+     @EJB
+    DomainDao dao;
 
     /**
      * {@inheritDoc}
@@ -62,7 +65,7 @@ public class Service extends GenericRestService<ServiceEntity> {
      * {@inheritDoc}
      *
      * @summary Creates
-     * @responseType se.backede.archetype.entity.ServiceEntity
+     * @responseType se.backede.archetype.entity.DomainEntity
      * @param entity
      */
     @POST
@@ -70,7 +73,7 @@ public class Service extends GenericRestService<ServiceEntity> {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Override
-    public Response create(ServiceEntity entity) {
+    public Response create(DomainEntity entity) {
         return super.create(entity);
     }
 
@@ -78,7 +81,7 @@ public class Service extends GenericRestService<ServiceEntity> {
      * {@inheritDoc}
      *
      * @summary Updates
-     * @responseType se.backede.archetype.entity.ServiceEntity
+     * @responseType se.backede.archetype.entity.DomainEntity
      * @param entity
      */
     @PUT
@@ -86,7 +89,7 @@ public class Service extends GenericRestService<ServiceEntity> {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Override
-    public Response update(@PathParam("id") String id, ServiceEntity entity) {
+    public Response update(@PathParam("id") String id, DomainEntity entity) {
         return super.update(id, entity);
     }
 
@@ -109,7 +112,7 @@ public class Service extends GenericRestService<ServiceEntity> {
      * {@inheritDoc}
      *
      * @summary Gets data by id
-     * @responseType se.backede.archetype.entity.ServiceEntity
+     * @responseType se.backede.archetype.entity.DomainEntity
      */
     @GET
     @Path("/{id}")
@@ -124,7 +127,7 @@ public class Service extends GenericRestService<ServiceEntity> {
      * {@inheritDoc}
      *
      * @summary Gets a filtered list
-     * @responseType java.util.List<se.backede.archetype.entity.ServiceEntity>
+     * @responseType java.util.List<se.backede.archetype.entity.DomainEntity>
      */
     @POST
     @Path("/list")
@@ -164,5 +167,5 @@ public class Service extends GenericRestService<ServiceEntity> {
     public Response indexEntity() {
         return super.indexEntity();
     }
-
+    
 }

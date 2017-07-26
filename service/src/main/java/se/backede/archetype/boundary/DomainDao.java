@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package se.backede.archetype.boundary;
 
 import com.negod.generics.persistence.GenericDao;
@@ -7,7 +12,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
-import se.backede.archetype.entity.ServiceEntity;
+import se.backede.archetype.entity.DomainEntity;
 
 /**
  *
@@ -16,7 +21,7 @@ import se.backede.archetype.entity.ServiceEntity;
 @LocalBean
 @Stateless
 @Slf4j
-public class Dao extends GenericDao<ServiceEntity> {
+public class DomainDao extends GenericDao<DomainEntity> {
 
     @PersistenceContext(unitName = "ServicePU")
     private EntityManager em;
@@ -26,8 +31,7 @@ public class Dao extends GenericDao<ServiceEntity> {
         return em;
     }
 
-    public Dao() throws DaoException {
-        super(ServiceEntity.class);
+    public DomainDao() throws DaoException {
+        super(DomainEntity.class);
     }
-
 }

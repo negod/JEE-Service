@@ -66,7 +66,7 @@ public class ServiceEntity extends GenericEntity {
     private DomainEntity domain;
 
     @XmlElement
-    @IndexedEmbedded
+    @IndexedEmbedded()
     @JoinTable(name = "SERVICE_USER",
             joinColumns = {
                 @JoinColumn(name = "service_id")},
