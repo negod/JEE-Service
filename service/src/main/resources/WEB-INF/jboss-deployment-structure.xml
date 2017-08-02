@@ -4,25 +4,13 @@
         <exclude-subsystems>
             <subsystem name="logging" />
         </exclude-subsystems>
-        <!--exclusions>
-            <module name="org.apache.commons.logging" />
-            <module name="org.apache.log4j" />
-            <module name="org.jboss.logging" />
-            <module name="org.jboss.logging.jul-to-slf4j-stub" />
-            <module name="org.jboss.logmanager" />
-            <module name="org.jboss.logmanager.log4j" />
-            <module name="org.slf4j" />
-            <module name="org.slf4j.impl" />
-        </exclusions-->
         <dependencies>           
             <system export="true">
                 <paths>
                     <path name="com/sun/corba/se/spi/legacy/connection"/>
                 </paths>
             </system>
-            <!-- add your project dependencies here -->
-            <module name="org.slf4j"/>
-            <module name="org.jboss.logging" />
+            <module name="org.jboss.logging"/>
         </dependencies>
     </deployment>
 </jboss-deployment-structure>
