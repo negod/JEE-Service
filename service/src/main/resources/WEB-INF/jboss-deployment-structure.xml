@@ -23,9 +23,6 @@
             <!-- add your project dependencies here -->
             <module name="org.slf4j"/>
             <module name="org.jboss.logging" />
-            <!--module name="org.jboss.logging.jul-to-slf4j-stub" />
-            <module name="org.jboss.logmanager" />
-            <module name="org.jboss.logmanager.log4j" /-->
         </dependencies>
     </deployment>
 </jboss-deployment-structure>

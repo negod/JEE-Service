@@ -5,6 +5,9 @@
  */
 package se.backede.archetype;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +22,11 @@ import net.sf.ehcache.CacheManager;
 @Singleton
 @Slf4j
 public class CacheChecker {
+    
 
-    public void logCaches() {
+    public Optional<Map> logCaches() {
 
+        HashMap map = new HashMap<String, String>();
         CacheManager cm = CacheManager.getInstance();
 
         Cache service = cm.getCache("service");
@@ -29,12 +34,14 @@ public class CacheChecker {
         Cache domain = cm.getCache("domain");
         Cache service_detail = cm.getCache("service_detail");
 
-        log.debug("Service Online?" + service.isDisabled());
-        log.debug("Domain Online?" + user.isDisabled());
-        log.debug("User Online?" + domain.isDisabled());
-        log.debug("SErvice_deatail Online?" + service_detail.isDisabled());
+        map.put("Service", service.isDisabled());
+        map.put("Domain", user.isDisabled());
+        map.put("User", domain.isDisabled());
+        map.put("Service_deatail", service_detail.isDisabled());
 
         cm.shutdown();
+
+        return Optional.of(map);
 
     }
 

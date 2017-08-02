@@ -9,8 +9,8 @@
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <properties>
             <property name="hibernate.dialect" value="${hibernate.dialect}"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
             <!-- Hibernate search -->
             <property name="hibernate.search.default.directory_provider" value="filesystem"/>
             <property name="hibernate.search.default.indexBase" value="/app/${application.name}/.lucene/indexes"/>
@@ -21,8 +21,7 @@
             <property name="hibernate.cache.use_second_level_cache" value="true" />
             <property name="hibernate.cache.use_query_cache" value="true" />
             <property name="hibernate.generate_statistics" value="true" />
-            
-            
+            <property name="hibernate.cache.region_prefix" value=""/>
         </properties>
     </persistence-unit>
 </persistence>

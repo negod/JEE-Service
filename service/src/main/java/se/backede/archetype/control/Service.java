@@ -53,8 +53,7 @@ public class Service extends GenericRestService<ServiceEntity> {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response getCache() {
-        //cache.logCaches();
-        return Response.ok().build();
+        return Response.ok(cache.logCaches().get()).build();
     }
 
     /**

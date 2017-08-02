@@ -11,21 +11,10 @@
                   memoryStoreEvictionPolicy="LRU" statistics="true">        
     </defaultCache>
 
-    <cache name="service" eternal="true"
-           timeToIdleSeconds="5" timeToLiveSeconds="10">
-    </cache>
-    
-    <cache name="user" eternal="true"
-           timeToIdleSeconds="5" timeToLiveSeconds="10">
-    </cache>
-
-    <cache name="service_detail" eternal="true"
-           timeToIdleSeconds="5" timeToLiveSeconds="10">
-    </cache>
-
-    <cache name="domain" eternal="true"
-           timeToIdleSeconds="5" timeToLiveSeconds="10">
-    </cache>
+    <cache name="service" eternal="true"/> 
+    <cache name="user" eternal="true"/>
+    <cache name="service_detail" eternal="true"/>
+    <cache name="domain" eternal="true"/>
 
     <cache name="org.hibernate.cache.internal.StandardQueryCache"
            eternal="false" timeToLiveSeconds="120">
