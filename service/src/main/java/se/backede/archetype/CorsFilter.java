@@ -1,6 +1,5 @@
 package se.backede.archetype;
 
-
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,17 +9,15 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
  * @author Joakim Johansson (joakimjohansson@outlook.com)
  */
+@Slf4j
 @WebFilter("/*")
 public class CorsFilter implements Filter {
-
-    Logger log = LoggerFactory.getLogger(CorsFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

@@ -7,6 +7,7 @@ package se.backede.archetype.entity;
 
 import com.negod.generics.persistence.entity.GenericEntity;
 import java.util.Set;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,13 +16,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.AnalyzerDef;
-import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
@@ -38,8 +41,10 @@ import org.hibernate.search.annotations.TokenizerDef;
 @Entity
 @XmlRootElement(name = "domain")
 @XmlAccessorType(XmlAccessType.NONE)
-@Data
+@Getter
+@Setter
 @Indexed
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "domain")
 @AnalyzerDef(name = "domain_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
@@ -53,8 +58,7 @@ public class DomainEntity extends GenericEntity {
     @XmlElement
     private String name;
 
-    @ContainedIn
-    @IndexedEmbedded(depth = 1)
+    @IndexedEmbedded(depth = 3)
     @OneToMany(mappedBy = "domain")
     private Set<ServiceEntity> services;
 

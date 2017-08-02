@@ -2,9 +2,9 @@ package se.backede.archetype.entity;
 
 import com.negod.generics.persistence.entity.GenericEntity;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,9 +26,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
@@ -39,7 +42,7 @@ import org.hibernate.search.annotations.TokenizerDef;
 
 /**
  *
- * @author joakim.backede@outlook.com
+ * @author Joakim Backede joakim.backede@outlook.com
  */
 @Table(name = "SERVICE")
 @Entity
@@ -48,8 +51,9 @@ import org.hibernate.search.annotations.TokenizerDef;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true) 
+@EqualsAndHashCode(callSuper = true)
 @Indexed
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "service")
 @AnalyzerDef(name = "service_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
@@ -63,26 +67,29 @@ public class ServiceEntity extends GenericEntity {
     @XmlElement
     private String name;
 
+    @ContainedIn
     @XmlElement
-    @IndexedEmbedded
-    @OneToOne(mappedBy = "service", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ServiceDetailEntity serviceDetail;
+    @IndexedEmbedded(depth = 3)
+    @OneToOne(mappedBy = "service", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private ServiceDetailEntity detail;
 
+    @ContainedIn
     @XmlElement
-    @IndexedEmbedded
+    @IndexedEmbedded(depth = 3)
     @JoinColumn(name = "domain_id")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     private DomainEntity domain;
 
+    @ContainedIn
     @XmlElement
-    @IndexedEmbedded()
+    @IndexedEmbedded(depth = 3)
     @JoinTable(name = "SERVICE_USER",
             joinColumns = {
                 @JoinColumn(name = "service_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "user_id")})
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<UserEntity> users = new HashSet<>();
+    private Set<UserEntity> users;
 
     //For OneToOne relation
     @PrePersist
@@ -90,9 +97,9 @@ public class ServiceEntity extends GenericEntity {
     protected void onCreate() {
         super.setUpdatedDate(new Date());
         super.setId(UUID.randomUUID().toString());
-        serviceDetail.setId(super.getId());
-        serviceDetail.setUpdatedDate(super.getUpdatedDate());
-        serviceDetail.setService(this);
+        detail.setId(super.getId());
+        detail.setUpdatedDate(super.getUpdatedDate());
+        detail.setService(this);
     }
 
 }

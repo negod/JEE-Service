@@ -37,7 +37,7 @@
     <properties>
 
         <!-- JPA DEPENDENCIES-->
-        <hibernate.core.version>5.1.0.Final</hibernate.core.version>
+        <hibernate.core.version>5.0.7.Final</hibernate.core.version>
         <hibernate.validator.version>5.2.4.Final</hibernate.validator.version>
         <hibernate.search.version>5.5.3.Final</hibernate.search.version>
         <hibernate.search.infispan.version>5.5.2.Final</hibernate.search.infispan.version>
@@ -79,24 +79,18 @@
             <version>${hibernate.core.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate.validator.version}</version>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- for JPA, use hibernate-entitymanager instead of hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.core.version}</version>
+            <version>${hibernate.core.version}</version>            
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-            <version>${hibernate.core.version}</version>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>            
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -110,8 +104,20 @@
             <artifactId>hibernate-search-infinispan</artifactId>
             <version>${hibernate.search.infispan.version}</version>    
             <scope>provided</scope>   
-        </dependency>      
+        </dependency>
         
+        <!-- CACHING -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate.core.version}</version>           
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.4.3</version>
+        </dependency>
+
         <!-- JAVAEE -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

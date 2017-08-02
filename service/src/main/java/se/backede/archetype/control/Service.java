@@ -5,6 +5,7 @@ package se.backede.archetype.control;
 
 import com.negod.generics.persistence.GenericDao;
 import com.negod.generics.persistence.search.GenericFilter;
+import java.util.Optional;
 import se.backede.archetype.boundary.ServiceDao;
 import se.backede.archetype.entity.ServiceEntity;
 import javax.ejb.EJB;
@@ -20,6 +21,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
+import se.backede.archetype.CacheChecker;
 import se.backede.webservice.service.GenericRestService;
 
 /**
@@ -34,6 +36,9 @@ public class Service extends GenericRestService<ServiceEntity> {
     @EJB
     ServiceDao dao;
 
+    @EJB
+    CacheChecker cache;
+
     /**
      * {@inheritDoc}
      *
@@ -41,6 +46,15 @@ public class Service extends GenericRestService<ServiceEntity> {
     @Override
     public GenericDao getDao() {
         return dao;
+    }
+
+    @GET
+    @Path("/cache")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getCache() {
+        //cache.logCaches();
+        return Response.ok().build();
     }
 
     /**
@@ -88,6 +102,25 @@ public class Service extends GenericRestService<ServiceEntity> {
     @Override
     public Response update(@PathParam("id") String id, ServiceEntity entity) {
         return super.update(id, entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @summary Updates
+     * @responseType se.backede.archetype.entity.ServiceEntity
+     * @param entity
+     */
+    @PUT
+    @Path("domain/{serviceid}/{domainid}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response setDomain(@PathParam("serviceid") String serviceid, @PathParam("domainid") String domainid) {
+        Optional<ServiceEntity> putDomain = dao.putDomain(serviceid, domainid);
+        if (putDomain.isPresent()) {
+            return Response.ok(putDomain.get()).build();
+        }
+        return Response.serverError().build();
     }
 
     /**

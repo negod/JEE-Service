@@ -8,6 +8,7 @@ package se.backede.archetype.entity;
 import com.negod.generics.persistence.entity.GenericEntity;
 import java.util.Date;
 import java.util.UUID;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,6 +28,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.AnalyzerDef;
@@ -50,6 +53,7 @@ import org.hibernate.search.annotations.TokenizerDef;
 @Getter
 @Setter
 @Indexed
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "service_detail")
 @AnalyzerDef(name = "service_detail_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
@@ -64,7 +68,7 @@ public class ServiceDetailEntity extends GenericEntity {
     private String name;
 
     @IndexedEmbedded(depth = 1)
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = false)
     @PrimaryKeyJoinColumn
     @ContainedIn
     private ServiceEntity service;
