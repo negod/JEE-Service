@@ -41,19 +41,21 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
+import se.backede.archetype.entity.constants.EntityConstants;
 
 /**
  *
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
-@Table(name = "SERVICE_DETAIL")
+@Table(name = EntityConstants.SERVICE_DETAIL)
 @Entity
-@XmlRootElement(name = "service_detail")
+@XmlRootElement(name = EntityConstants.SERVICE_DETAIL)
 @XmlAccessorType(XmlAccessType.NONE)
 @Getter
 @Setter
 @Indexed
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "service_detail")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = EntityConstants.SERVICE_DETAIL)
 @AnalyzerDef(name = "service_detail_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {

@@ -13,10 +13,10 @@
     <include file="\schema\tables\service_user.xml"/>
     
     <!-- Initdata -->
-    <include file="\schema\initdata\domain_init.xml"/>
+    <!--include file="\schema\initdata\domain_init.xml"/>
     <include file="\schema\initdata\service_init.xml"/>
     <include file="\schema\initdata\user_init.xml"/>
     <include file="\schema\initdata\service_detail_init.xml"/>
-    <include file="\schema\initdata\service_user_init.xml"/>
+    <include file="\schema\initdata\service_user_init.xml"/-->
 	
 </databaseChangeLog>

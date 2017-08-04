@@ -11,6 +11,7 @@ import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -34,19 +35,21 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
+import se.backede.archetype.entity.constants.EntityConstants;
 
 /**
  *
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
-@Table(name = "USER")
+@Table(name = EntityConstants.USER)
 @Entity
-@XmlRootElement(name = "user")
+@XmlRootElement(name = EntityConstants.USER)
 @XmlAccessorType(XmlAccessType.NONE)
 @Getter
 @Setter
 @Indexed
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "user")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = EntityConstants.USER)
 @AnalyzerDef(name = "user_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
@@ -62,7 +65,8 @@ public class UserEntity extends GenericEntity {
 
     @ContainedIn
     @IndexedEmbedded(depth = 1)
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "user.services")
     private Set<ServiceEntity> services;
 
 }

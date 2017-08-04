@@ -2,6 +2,7 @@ package se.backede.archetype.entity;
 
 import com.negod.generics.persistence.entity.GenericEntity;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Cacheable;
@@ -39,21 +40,23 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
+import se.backede.archetype.entity.constants.EntityConstants;
 
 /**
  *
  * @author Joakim Backede joakim.backede@outlook.com
  */
-@Table(name = "SERVICE")
+@Table(name = EntityConstants.SERVICE)
 @Entity
-@XmlRootElement(name = "service")
+@XmlRootElement(name = EntityConstants.SERVICE)
 @XmlAccessorType(XmlAccessType.NONE)
 @Getter
 @Setter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Indexed
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "service")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = EntityConstants.SERVICE)
 @AnalyzerDef(name = "service_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
@@ -70,26 +73,27 @@ public class ServiceEntity extends GenericEntity {
     @ContainedIn
     @XmlElement
     @IndexedEmbedded(depth = 3)
-    @OneToOne(mappedBy = "service", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "service", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private ServiceDetailEntity detail;
 
     @ContainedIn
     @XmlElement
     @IndexedEmbedded(depth = 3)
     @JoinColumn(name = "domain_id")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private DomainEntity domain;
 
     @ContainedIn
     @XmlElement
     @IndexedEmbedded(depth = 3)
-    @JoinTable(name = "SERVICE_USER",
+    @JoinTable(name = "service_user",
             joinColumns = {
                 @JoinColumn(name = "service_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "user_id")})
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<UserEntity> users;
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "service.users")
+    private Set<UserEntity> users = new HashSet<>();
 
     //For OneToOne relation
     @PrePersist
@@ -97,9 +101,11 @@ public class ServiceEntity extends GenericEntity {
     protected void onCreate() {
         super.setUpdatedDate(new Date());
         super.setId(UUID.randomUUID().toString());
-        detail.setId(super.getId());
-        detail.setUpdatedDate(super.getUpdatedDate());
-        detail.setService(this);
+        if (detail != null) {
+            detail.setId(super.getId());
+            detail.setUpdatedDate(super.getUpdatedDate());
+            detail.setService(this);
+        }
     }
 
 }

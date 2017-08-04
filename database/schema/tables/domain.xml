@@ -8,9 +8,9 @@
                         http://www.liquibase.org/xml/ns/dbchangelog 
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet author="authorName" id="Create Domain Table">
+    <changeSet author="authorName" id="Create domain Table">
 
-        <createTable tableName="DOMAIN" remarks="Table DOMAIN example" >
+        <createTable tableName="domain" remarks="Table domain example" >
             <column name="internalId" type="bigint" autoIncrement="true">
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -26,7 +26,7 @@
         </createTable>
 
         <rollback>
-            <dropTable tableName="DOMAIN" cascadeConstraints="true" />
+            <dropTable tableName="domain" cascadeConstraints="true" />
         </rollback>
         
     </changeSet>

@@ -6,10 +6,12 @@
 package se.backede.archetype.entity;
 
 import com.negod.generics.persistence.entity.GenericEntity;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,19 +34,21 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
+import se.backede.archetype.entity.constants.EntityConstants;
 
 /**
  *
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
-@Table(name = "DOMAIN")
+@Table(name = EntityConstants.DOMAIN)
 @Entity
-@XmlRootElement(name = "domain")
+@XmlRootElement(name = EntityConstants.DOMAIN)
 @XmlAccessorType(XmlAccessType.NONE)
 @Getter
 @Setter
 @Indexed
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "domain")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = EntityConstants.DOMAIN)
 @AnalyzerDef(name = "domain_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
@@ -59,7 +63,8 @@ public class DomainEntity extends GenericEntity {
     private String name;
 
     @IndexedEmbedded(depth = 3)
-    @OneToMany(mappedBy = "domain")
-    private Set<ServiceEntity> services;
+    @OneToMany(mappedBy = "domain", fetch = FetchType.LAZY)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "domain.services")
+    private Set<ServiceEntity> services = new HashSet<>();
 
 }

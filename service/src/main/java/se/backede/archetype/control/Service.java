@@ -4,7 +4,9 @@
 package se.backede.archetype.control;
 
 import com.negod.generics.persistence.GenericDao;
+import com.negod.generics.persistence.exception.DaoException;
 import com.negod.generics.persistence.search.GenericFilter;
+import com.negod.generics.persistence.update.ObjectUpdate;
 import java.util.Optional;
 import se.backede.archetype.boundary.ServiceDao;
 import se.backede.archetype.entity.ServiceEntity;
@@ -48,12 +50,20 @@ public class Service extends GenericRestService<ServiceEntity> {
         return dao;
     }
 
-    @GET
-    @Path("/cache")
+    /**
+     * {@inheritDoc}
+     *
+     * @summary Updates
+     * @responseType se.backede.archetype.entity.ServiceEntity
+     * @param entity
+     */
+    @PUT
+    @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getCache() {
-        return Response.ok(cache.logCaches().get()).build();
+    @Override
+    public Response updateObject(@PathParam("id") String id, ObjectUpdate entity) {
+        return super.updateObject(id, entity);
     }
 
     /**
@@ -103,25 +113,24 @@ public class Service extends GenericRestService<ServiceEntity> {
         return super.update(id, entity);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @summary Updates
-     * @responseType se.backede.archetype.entity.ServiceEntity
-     * @param entity
-     */
-    @PUT
-    @Path("domain/{serviceid}/{domainid}")
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response setDomain(@PathParam("serviceid") String serviceid, @PathParam("domainid") String domainid) {
-        Optional<ServiceEntity> putDomain = dao.putDomain(serviceid, domainid);
-        if (putDomain.isPresent()) {
-            return Response.ok(putDomain.get()).build();
-        }
-        return Response.serverError().build();
-    }
-
+//    /**
+//     * {@inheritDoc}
+//     *
+//     * @summary Updates
+//     * @responseType se.backede.archetype.entity.ServiceEntity
+//     * @param entity
+//     */
+//    @PUT
+//    @Path("domain/{serviceid}/{domainid}")
+//    @Consumes({MediaType.APPLICATION_JSON})
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public Response setDomain(@PathParam("serviceid") String serviceid, @PathParam("domainid") String domainid) {
+//        Optional<ServiceEntity> putDomain = dao.putDomain(serviceid, domainid);
+//        if (putDomain.isPresent()) {
+//            return Response.ok(putDomain.get()).build();
+//        }
+//        return Response.serverError().build();
+//    }
     /**
      * {@inheritDoc}
      *
