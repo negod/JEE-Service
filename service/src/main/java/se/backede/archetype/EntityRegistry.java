@@ -48,7 +48,7 @@ public class EntityRegistry {
                     entitiesToRegister.put(cacheName.get(), entity.getBindableJavaType());
                 }
             } catch (DaoException ex) {
-                log.error("exception {}", ex);
+                log.error("Exception when extracting searchFields {}", ex);
             }
         }
 

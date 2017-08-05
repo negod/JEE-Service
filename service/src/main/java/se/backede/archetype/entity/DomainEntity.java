@@ -9,6 +9,7 @@ import com.negod.generics.persistence.entity.GenericEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -63,7 +64,7 @@ public class DomainEntity extends GenericEntity {
     private String name;
 
     @IndexedEmbedded(depth = 3)
-    @OneToMany(mappedBy = "domain", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "domain", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "domain.services")
     private Set<ServiceEntity> services = new HashSet<>();
 

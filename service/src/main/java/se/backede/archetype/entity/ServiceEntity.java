@@ -79,8 +79,8 @@ public class ServiceEntity extends GenericEntity {
     @ContainedIn
     @XmlElement
     @IndexedEmbedded(depth = 3)
-    @JoinColumn(name = "domain_id")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "domain_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private DomainEntity domain;
 
     @ContainedIn
@@ -93,7 +93,7 @@ public class ServiceEntity extends GenericEntity {
                 @JoinColumn(name = "user_id")})
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "service.users")
-    private Set<UserEntity> users = new HashSet<>();
+    private Set<UserEntity> users;
 
     //For OneToOne relation
     @PrePersist

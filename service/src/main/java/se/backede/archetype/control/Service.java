@@ -8,6 +8,8 @@ import com.negod.generics.persistence.exception.DaoException;
 import com.negod.generics.persistence.search.GenericFilter;
 import com.negod.generics.persistence.update.ObjectUpdate;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se.backede.archetype.boundary.ServiceDao;
 import se.backede.archetype.entity.ServiceEntity;
 import javax.ejb.EJB;
@@ -113,24 +115,6 @@ public class Service extends GenericRestService<ServiceEntity> {
         return super.update(id, entity);
     }
 
-//    /**
-//     * {@inheritDoc}
-//     *
-//     * @summary Updates
-//     * @responseType se.backede.archetype.entity.ServiceEntity
-//     * @param entity
-//     */
-//    @PUT
-//    @Path("domain/{serviceid}/{domainid}")
-//    @Consumes({MediaType.APPLICATION_JSON})
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Response setDomain(@PathParam("serviceid") String serviceid, @PathParam("domainid") String domainid) {
-//        Optional<ServiceEntity> putDomain = dao.putDomain(serviceid, domainid);
-//        if (putDomain.isPresent()) {
-//            return Response.ok(putDomain.get()).build();
-//        }
-//        return Response.serverError().build();
-//    }
     /**
      * {@inheritDoc}
      *
