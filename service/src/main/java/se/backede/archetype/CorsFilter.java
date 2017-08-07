@@ -1,45 +1,25 @@
 package se.backede.archetype;
 
 import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerResponseContext;
+import javax.ws.rs.container.ContainerResponseFilter;
+import javax.ws.rs.ext.Provider;
 
 /**
  *
  * @author Joakim Johansson (joakimjohansson@outlook.com)
  */
-@Slf4j
-@WebFilter("/*")
-public class CorsFilter implements Filter {
+@Provider
+public class CorsFilter implements ContainerResponseFilter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        log.debug("INIT CORS FILTER");
+    public void filter(ContainerRequestContext paramContainerRequestContext, ContainerResponseContext paramContainerResponseContext) throws IOException {
+        paramContainerResponseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+        paramContainerResponseContext.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
+        paramContainerResponseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
+        paramContainerResponseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        paramContainerResponseContext.getHeaders().add("Access-Control-Max-Age", "1209600");
     }
 
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        try {
-            HttpServletResponse response = (HttpServletResponse) res;
-            response.setHeader("Access-Control-Allow-Origin", "http://localhost:9000");
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
-            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Accept, X-Requested-With");
-            chain.doFilter(req, response);
-        } catch (IOException | ServletException e) {
-            log.error("CORS FILTER EXCEPTION" + e.getMessage());
-        }
-    }
-
-    @Override
-    public void destroy() {
-        log.debug("DESTROY CORS FILTER");
-    }
 }

@@ -46,20 +46,4 @@ public class ServiceDao extends GenericDao<ServiceEntity> {
         super(ServiceEntity.class);
     }
 
-    public Optional<ServiceEntity> putDomain(String serviceId, ObjectUpdate update) throws DaoException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-
-        Optional<DomainEntity> domain = domainDao.getById(update.getObjectId());
-        if (domain.isPresent()) {
-            Optional<ServiceEntity> service = super.getById(serviceId);
-            Optional<DomainEntity> byId = super.getById(update.getObjectId(), DomainEntity.class);
-            if (service.isPresent()) {
-                ServiceEntity entity = service.get();
-                getEntityManager().detach(entity);
-                service.get().setDomain(byId.get());
-                return Optional.ofNullable(getEntityManager().merge(service.get()));
-            }
-        }
-        return Optional.empty();
-    }
-
 }

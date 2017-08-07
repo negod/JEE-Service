@@ -5,23 +5,11 @@
  */
 package se.backede.archetype.boundary;
 
-import com.negod.generics.persistence.search.GenericFilter;
-import com.negod.generics.persistence.search.Pagination;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import javax.ejb.embeddable.EJBContainer;
-import javax.persistence.EntityManager;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
-import se.backede.archetype.entity.ServiceEntity;
 
 /**
  *

@@ -18,8 +18,6 @@
     <cache name="service_detail" eternal="true"/>
     <cache name="domain" eternal="true"/>
     <cache name="domain.services" eternal="true"/>
-    
-    <cache name="entity_registry" eternal="true"/>
 
     <cache name="org.hibernate.cache.internal.StandardQueryCache"
            eternal="false" timeToLiveSeconds="120">
