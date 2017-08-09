@@ -41,7 +41,7 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
-import se.backede.archetype.entity.constants.EntityConstants;
+import se.backede.archetype.constants.EntityConstants;
 
 /**
  *

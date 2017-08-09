@@ -35,20 +35,20 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
-import se.backede.archetype.entity.constants.EntityConstants;
+import se.backede.archetype.constants.EntityConstants;
 
 /**
  *
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
-@Table(name = EntityConstants.DOMAIN)
 @Entity
-@XmlRootElement(name = EntityConstants.DOMAIN)
-@XmlAccessorType(XmlAccessType.NONE)
 @Getter
 @Setter
 @Indexed
 @Cacheable
+@Table(name = EntityConstants.DOMAIN)
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = EntityConstants.DOMAIN)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = EntityConstants.DOMAIN)
 @AnalyzerDef(name = "domain_customanalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),

@@ -80,7 +80,7 @@
         <appender-ref ref="FILE" />
     </logger>
 
-    <root level="DEBUG">
+    <root level="ERROR">
         <appender-ref ref="ERROR"/>
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>

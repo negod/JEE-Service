@@ -53,8 +53,8 @@
         <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
         
         <!-- Backede libs -->
-        <persistence.version>1.3-SNAPSHOT</persistence.version>
-        <webservice.version>1.2-SNAPSHOT</webservice.version>
+        <persistence.version>1.4-SNAPSHOT</persistence.version>
+        <webservice.version>1.3-SNAPSHOT</webservice.version>
         
     </properties>
     
