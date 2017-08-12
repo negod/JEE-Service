@@ -41,3 +41,4 @@ Service_Test-Create-Create-0-FAILED.txt
 /service/src/main/resources/logging.properties
 /service/target/
 /service/nbproject/
+/service/nb-configuration.xml

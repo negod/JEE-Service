@@ -6,7 +6,12 @@
 package se.backede.archetype.entity;
 
 import com.negod.generics.persistence.entity.GenericEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.models.ExternalDocs;
+import io.swagger.models.Model;
+import io.swagger.models.properties.Property;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
@@ -41,6 +46,7 @@ import se.backede.archetype.constants.EntityConstants;
  *
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
+@ApiModel
 @Entity
 @Getter
 @Setter
@@ -66,6 +72,7 @@ public class DomainEntity extends GenericEntity {
     @IndexedEmbedded(depth = 3)
     @OneToMany(mappedBy = "domain", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "domain.services")
+    @XmlElement
     private Set<ServiceEntity> services = new HashSet<>();
 
 }

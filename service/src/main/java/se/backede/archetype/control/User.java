@@ -6,6 +6,7 @@
 package se.backede.archetype.control;
 
 import com.negod.generics.persistence.GenericDao;
+import io.swagger.annotations.Api;
 import javax.ejb.EJB;
 import javax.ws.rs.Path;
 import se.backede.archetype.boundary.UserDao;
@@ -16,6 +17,7 @@ import se.backede.webservice.service.RestService;
  *
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
+@Api
 @Path("/user")
 public class User implements RestService<UserEntity> {
 

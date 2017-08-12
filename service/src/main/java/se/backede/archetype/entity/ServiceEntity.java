@@ -42,6 +42,7 @@ import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
 import se.backede.archetype.constants.EntityConstants;
 
+
 /**
  *
  * @author Joakim Backede joakim.backede@outlook.com

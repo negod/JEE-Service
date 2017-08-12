@@ -1,12 +1,14 @@
 package se.backede.archetype;
 
 import java.util.Set;
+import javax.ejb.Singleton;
 import javax.ws.rs.core.Application;
 
 /**
  *
  * @author Joakim Johansson ( joakimjohansson@outlook.com )
  */
+@Singleton
 @javax.ws.rs.ApplicationPath("rest")
 public class ApplicationConfig extends Application {
 
@@ -27,6 +29,7 @@ public class ApplicationConfig extends Application {
         resources.add(se.backede.archetype.CorsFilter.class);
         resources.add(se.backede.archetype.control.Domain.class);
         resources.add(se.backede.archetype.control.Service.class);
+        resources.add(se.backede.archetype.control.Swagger.class);
         resources.add(se.backede.archetype.control.User.class);
     }
     

@@ -1,0 +1,825 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0-SNAPSHOT",
+    "title" : "service-parent"
+  },
+  "host" : "192.168.2.140:8082",
+  "basePath" : "/service-parent-1.0-SNAPSHOT/rest",
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/domain" : {
+      "get" : {
+        "summary" : "getAll",
+        "description" : "Returns a list of Objects",
+        "operationId" : "getAll",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "create",
+        "description" : "Returns the persisted object",
+        "operationId" : "create",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The Object to create",
+          "required" : true,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful persisting the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/domain/filter" : {
+      "post" : {
+        "summary" : "getFilteredList",
+        "description" : "Get a filtered list of the owning object",
+        "operationId" : "getFilteredList",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The filter to use when querying",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/GenericFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entities found for the query",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/domain/index" : {
+      "post" : {
+        "summary" : "indexEntity",
+        "description" : "Indexes the owning object ( Reindexes Lucene )",
+        "operationId" : "indexEntity",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/domain/search/fields" : {
+      "get" : {
+        "summary" : "getSearchFields",
+        "description" : "Get all searchable fields for the owning object",
+        "operationId" : "getSearchFields",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No searchfields found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/domain/update/{id}" : {
+      "put" : {
+        "summary" : "updateObject",
+        "description" : "Add or Delete subobjects to owning object",
+        "operationId" : "updateObject",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Information on the object to ADD, DELETE",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ObjectUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful ADD or DELETE of the sub entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found to update",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/domain/{id}" : {
+      "get" : {
+        "summary" : "get",
+        "description" : "Gets an object by its id",
+        "operationId" : "getById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "update",
+        "description" : "Update the owning object",
+        "operationId" : "update",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The object data to update",
+          "required" : true,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful update of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete",
+        "description" : "deletes an object by its id",
+        "operationId" : "delete",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful deletion of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/service-parent" : {
+      "get" : {
+        "summary" : "getAll",
+        "description" : "Returns a list of Objects",
+        "operationId" : "getAll",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "create",
+        "description" : "Returns the persisted object",
+        "operationId" : "create",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The Object to create",
+          "required" : true,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful persisting the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/service-parent/filter" : {
+      "post" : {
+        "summary" : "getFilteredList",
+        "description" : "Get a filtered list of the owning object",
+        "operationId" : "getFilteredList",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The filter to use when querying",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/GenericFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entities found for the query",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/service-parent/index" : {
+      "post" : {
+        "summary" : "indexEntity",
+        "description" : "Indexes the owning object ( Reindexes Lucene )",
+        "operationId" : "indexEntity",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/service-parent/search/fields" : {
+      "get" : {
+        "summary" : "getSearchFields",
+        "description" : "Get all searchable fields for the owning object",
+        "operationId" : "getSearchFields",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No searchfields found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/service-parent/update/{id}" : {
+      "put" : {
+        "summary" : "updateObject",
+        "description" : "Add or Delete subobjects to owning object",
+        "operationId" : "updateObject",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Information on the object to ADD, DELETE",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ObjectUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful ADD or DELETE of the sub entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found to update",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/service-parent/{id}" : {
+      "get" : {
+        "summary" : "get",
+        "description" : "Gets an object by its id",
+        "operationId" : "getById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "update",
+        "description" : "Update the owning object",
+        "operationId" : "update",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The object data to update",
+          "required" : true,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful update of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete",
+        "description" : "deletes an object by its id",
+        "operationId" : "delete",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful deletion of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/user" : {
+      "get" : {
+        "summary" : "getAll",
+        "description" : "Returns a list of Objects",
+        "operationId" : "getAll",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "create",
+        "description" : "Returns the persisted object",
+        "operationId" : "create",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The Object to create",
+          "required" : true,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful persisting the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/filter" : {
+      "post" : {
+        "summary" : "getFilteredList",
+        "description" : "Get a filtered list of the owning object",
+        "operationId" : "getFilteredList",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The filter to use when querying",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/GenericFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entities found for the query",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/index" : {
+      "post" : {
+        "summary" : "indexEntity",
+        "description" : "Indexes the owning object ( Reindexes Lucene )",
+        "operationId" : "indexEntity",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/search/fields" : {
+      "get" : {
+        "summary" : "getSearchFields",
+        "description" : "Get all searchable fields for the owning object",
+        "operationId" : "getSearchFields",
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the filteref entity list",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No searchfields found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/update/{id}" : {
+      "put" : {
+        "summary" : "updateObject",
+        "description" : "Add or Delete subobjects to owning object",
+        "operationId" : "updateObject",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Information on the object to ADD, DELETE",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ObjectUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful ADD or DELETE of the sub entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found to update",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/{id}" : {
+      "get" : {
+        "summary" : "get",
+        "description" : "Gets an object by its id",
+        "operationId" : "getById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful retrieval of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "204" : {
+            "description" : "No entity found",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "update",
+        "description" : "Update the owning object",
+        "operationId" : "update",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to update",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The object data to update",
+          "required" : true,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful update of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete",
+        "description" : "deletes an object by its id",
+        "operationId" : "delete",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The id of the Object to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful deletion of the entity",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "GenericFilter" : {
+      "type" : "object",
+      "properties" : {
+        "searchFields" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "globalSearchWord" : {
+          "type" : "string"
+        },
+        "pagination" : {
+          "$ref" : "#/definitions/Pagination"
+        }
+      }
+    },
+    "ObjectUpdate" : {
+      "type" : "object",
+      "properties" : {
+        "objectId" : {
+          "type" : "string"
+        },
+        "object" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string",
+          "enum" : [ "UPDATE", "DELETE", "ADD" ]
+        }
+      }
+    },
+    "Pagination" : {
+      "type" : "object",
+      "properties" : {
+        "listSize" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "page" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "Response" : {
+      "type" : "object",
+      "properties" : {
+        "entity" : {
+          "type" : "object"
+        },
+        "metadata" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          }
+        },
+        "status" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    }
+  }
+}
