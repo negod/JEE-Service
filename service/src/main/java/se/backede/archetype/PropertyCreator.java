@@ -8,6 +8,7 @@ package se.backede.archetype;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.negod.generics.persistence.entity.GenericEntity;
+import io.swagger.models.parameters.Parameter;
 import io.swagger.models.properties.ArrayProperty;
 import io.swagger.models.properties.DateProperty;
 import io.swagger.models.properties.DoubleProperty;
@@ -71,15 +72,24 @@ public class PropertyCreator<T extends GenericEntity> {
             ArrayProperty arrayProperty = new ArrayProperty();
             ParameterizedType stringListType = (ParameterizedType) field.getGenericType();
             Class<?> entityClass = (Class<?>) stringListType.getActualTypeArguments()[0];
+            if (entityClass.getSuperclass() == GenericEntity.class) {
+                RefProperty refProp = new RefProperty();
+                refProp.set$ref(entityClass.getSimpleName());
+                arrayProperty.setItems(refProp);
+            }
             retProperty.setName(field.getName());
             return arrayProperty;
         }
 
         if (clazz.getSuperclass() == GenericEntity.class) {
             Class<T> entityClass = (Class<T>) clazz;
+            RefProperty refProp = new RefProperty();
+            refProp.set$ref(entityClass.getSimpleName());
+            refProp.setName(field.getName());
+            return refProp;
         }
-        retProperty.setName(field.getName());
 
+        retProperty.setName(field.getName());
         return retProperty;
 
     }

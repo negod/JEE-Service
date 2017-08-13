@@ -72,7 +72,6 @@ public class DomainEntity extends GenericEntity {
     @IndexedEmbedded(depth = 3)
     @OneToMany(mappedBy = "domain", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "domain.services")
-    @XmlElement
     private Set<ServiceEntity> services = new HashSet<>();
 
 }

@@ -40,22 +40,22 @@ public class SwaggerExtractorIT {
     public void tearDown() {
     }
 
-    /**
-     * Test of getSwagger method, of class SwaggerExtractor.
-     */
-    @Test
-    public void testGetSwagger() throws Exception {
-        System.out.println("getSwagger");
-        SwaggerExtractor instance = new SwaggerExtractor();
-        String expResult = "";
-        String result = instance.getSwagger();
-        log.error(result);
-    }
-
-    @Test
-    public void test() throws InstantiationException, IllegalAccessException {
-        Domain domain = Domain.class.newInstance();
-        assert domain instanceof RestService;
-    }
+//    /**
+//     * Test of getSwagger method, of class SwaggerExtractor.
+//     */
+//    @Test
+//    public void testGetSwagger() throws Exception {
+//        System.out.println("getSwagger");
+//        SwaggerExtractor instance = new SwaggerExtractor();
+//        String expResult = "";
+//        String result = instance.getSwagger();
+//        log.error(result);
+//    }
+//
+//    @Test
+//    public void test() throws InstantiationException, IllegalAccessException {
+//        Domain domain = Domain.class.newInstance();
+//        assert domain instanceof RestService;
+//    }
 
 }
