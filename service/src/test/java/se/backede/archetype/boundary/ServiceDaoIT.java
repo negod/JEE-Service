@@ -5,6 +5,7 @@
  */
 package se.backede.archetype.boundary;
 
+import se.backede.archetype.control.ServiceDao;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

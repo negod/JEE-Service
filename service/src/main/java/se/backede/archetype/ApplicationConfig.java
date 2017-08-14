@@ -26,10 +26,12 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(se.backede.archetype.CorsFilter.class);
-        resources.add(se.backede.archetype.control.Domain.class);
-        resources.add(se.backede.archetype.control.Service.class);
-        resources.add(se.backede.archetype.control.User.class);
-        resources.add(se.backede.archetype.control.swagger.Swagger.class);
+        resources.add(se.backede.archetype.boundary.Domain.class);
+        resources.add(se.backede.archetype.boundary.Service.class);
+        resources.add(se.backede.archetype.boundary.Swagger.class);
+        resources.add(se.backede.archetype.boundary.User.class);
+        resources.add(se.backede.archetype.security.Auth.class);
+        resources.add(se.backede.webservice.security.AuthenticationFilter.class);
     }
 
 }

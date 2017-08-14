@@ -6,15 +6,27 @@
 package se.backede.archetype.boundary;
 
 import com.negod.generics.persistence.GenericDao;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import io.swagger.annotations.Api;
+import javax.ejb.EJB;
+import javax.ws.rs.Path;
+import se.backede.archetype.control.UserDao;
 import se.backede.archetype.entity.UserEntity;
+import se.backede.webservice.service.RestService;
 
 /**
  *
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
-@LocalBean
-@Stateless
-public class UserDao extends GenericDao<UserEntity> {
+@Api
+@Path("/user")
+public class User implements RestService<UserEntity> {
+
+    @EJB
+    UserDao dao;
+
+    @Override
+    public GenericDao getDao() {
+        return dao;
+    }
+
 }

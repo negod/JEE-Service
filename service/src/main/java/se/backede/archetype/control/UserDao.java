@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package se.backede.archetype.boundary;
+package se.backede.archetype.control;
 
 import com.negod.generics.persistence.GenericDao;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import se.backede.archetype.entity.DomainEntity;
+import se.backede.archetype.entity.UserEntity;
 
 /**
  *
@@ -16,5 +16,5 @@ import se.backede.archetype.entity.DomainEntity;
  */
 @LocalBean
 @Stateless
-public class DomainDao extends GenericDao<DomainEntity> {
+public class UserDao extends GenericDao<UserEntity> {
 }

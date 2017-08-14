@@ -11,7 +11,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import se.backede.archetype.control.Domain;
+import se.backede.archetype.boundary.Domain;
 import se.backede.webservice.service.RestService;
 
 /**

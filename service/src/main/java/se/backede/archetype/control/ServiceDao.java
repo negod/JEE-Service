@@ -1,4 +1,4 @@
-package se.backede.archetype.boundary;
+package se.backede.archetype.control;
 
 import com.negod.generics.persistence.GenericDao;
 import javax.ejb.LocalBean;
