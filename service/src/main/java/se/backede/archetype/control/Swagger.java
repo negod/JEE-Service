@@ -6,18 +6,19 @@
 package se.backede.archetype.control;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Optional;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import lombok.extern.slf4j.Slf4j;
 import se.backede.archetype.SwaggerExtractor;
 
 /**
  *
  * @author Joakim Backede ( joakim.backede@outlook.com )
  */
+@Slf4j
 @Stateless
 @Path("/swagger")
 public class Swagger {
@@ -29,9 +30,12 @@ public class Swagger {
     @Path("/")
     public String getJson() throws IOException {
         try {
-            return swagger.getSwagger();
+            Optional<String> swaggerString = swagger.getSwagger();
+            if (swaggerString.isPresent()) {
+                return swaggerString.get();
+            }
         } catch (InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(Swagger.class.getName()).log(Level.SEVERE, null, ex);
+            log.error("Error when retrieving Swagger JSON [ RestLayer ], ErrorMessage: {}", ex);
         }
         return "N/A";
     }

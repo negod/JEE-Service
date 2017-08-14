@@ -11,7 +11,6 @@ import io.swagger.models.Path;
 import io.swagger.models.Response;
 import io.swagger.models.Swagger;
 import io.swagger.models.parameters.BodyParameter;
-import io.swagger.models.parameters.Parameter;
 import io.swagger.parser.SwaggerParser;
 import io.swagger.parser.util.SwaggerDeserializationResult;
 import io.swagger.util.Json;
@@ -20,7 +19,11 @@ import java.io.InputStream;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.DependsOn;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -37,137 +40,133 @@ import se.backede.webservice.service.RestService;
 @Singleton
 @DependsOn(value = {"EntityRegistrySingleton", "ApplicationConfig"})
 public class SwaggerExtractor {
-    
+
     @EJB
     ApplicationConfig config;
-    
+
     @EJB
     EntityRegistrySingleton entities;
-    
-    private String SwaggerString = null;
-    private String[] defaultPaths = new String[]{"/filter", "/index", "/search/fields", "/{id}"};
-    
-    public String getSwagger() throws IOException, InstantiationException, IllegalAccessException {
-        log.trace("Getting Manupulated Swagger json");
-        
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream("swagger.json");
-        String swaggerFile = swaggerFile = IOUtils.toString(input, Charset.defaultCharset());
-        SwaggerDeserializationResult readWithInfo = new SwaggerParser().readWithInfo(swaggerFile);
-        Swagger swagger = readWithInfo.getSwagger();
-        
-        for (Class<?> registeredEntity : entities.getRegisteredEntities()) {
-            Model model = new GenericSwaggerModel(registeredEntity);
-            swagger.getDefinitions().put(registeredEntity.getSimpleName(), model);
-        }
-        
-        for (Map.Entry<String, Path> entry : swagger.getPaths().entrySet()) {
-            log.debug("PATH: {}", entry.getKey());
-        }
-        
-        for (Class<?> clazz : config.getClasses()) {
-            
-            if (clazz.newInstance() instanceof RestService) {
-                String basePath = PropertyCreator.getInstance().getBasePath(clazz);
-                
-                Class<?> classTypeForRestService = getClassTypeOfrestService(clazz);
-                if (classTypeForRestService == null) {
-                    continue;
-                }
-                
-                log.trace("Handling basepath {}", basePath);
-                Path path = swagger.getPath(basePath);
-                
-                if (path != null) {
-                    
-                    handlePost(path, classTypeForRestService, true);
-                    handleGet(path, classTypeForRestService);
-                    
-                    Path getByIdPath = swagger.getPath(basePath + "/{id}");
-                    handleGet(getByIdPath, classTypeForRestService);
-                    handlePut(getByIdPath, classTypeForRestService);
-                    handleDelete(getByIdPath, classTypeForRestService);
-                    
-                    Path filterPath = swagger.getPath(basePath + "/filter");
-                    handlePost(filterPath, classTypeForRestService, false);
 
-//                    Path indexPath = swagger.getPath(basePath + "/index");
-//                    handlePost(indexPath, Boolean.class);
-//
-//                    Path searchFieldPath = swagger.getPath(basePath + "/search/fields");
-//                    handleGet(searchFieldPath, String.class);
-                    Path objectUpdatePath = swagger.getPath(basePath + "/update/{id}");
-                    handlePut(objectUpdatePath, classTypeForRestService);
-                    
-                }
-                
-            } else {
-                continue;
-            }
-            
+    private Optional<String> swaggerString = Optional.empty();
+
+    public Optional<String> getSwagger() throws IOException, InstantiationException, IllegalAccessException {
+        log.trace("Getting Manupulated Swagger json");
+
+        if (swaggerString.isPresent()) {
+            return swaggerString;
         }
-        return Json.pretty(swagger);
+
+        Optional<Swagger> swagger = getSwaggerFromJson();
+
+        if (swagger.isPresent()) {
+
+            entities.getRegisteredEntities().forEach((Class entry) -> {
+                swagger.get().getDefinitions().put(entry.getSimpleName(), new GenericSwaggerModel(entry));
+            });
+
+        } else {
+            return Optional.empty();
+        }
+
+        config.getClasses().forEach((Class clazz) -> {
+            try {
+                if (clazz.newInstance() instanceof RestService) {
+                    Optional<String> basePath = PropertyCreator.getInstance().getBasePath(clazz);
+
+                    Optional<Class<?>> classTypeForRestService = getClassTypeOfrestService(clazz);
+                    if (classTypeForRestService.isPresent() && basePath.isPresent()) {
+
+                        Optional<Path> path = Optional.ofNullable(swagger.get().getPath(basePath.get()));
+
+                        if (path.isPresent()) {
+
+                            log.trace("Handling basepath {}", basePath);
+
+                            handleRequest(Optional.ofNullable(path.get().getPost()), classTypeForRestService.get(), true);
+                            handleRequest(Optional.ofNullable(path.get().getGet()), classTypeForRestService.get(), false);
+
+                            Optional<Path> getByIdPath = Optional.ofNullable(swagger.get().getPath(basePath + "/{id}"));
+                            if (getByIdPath.isPresent()) {
+                                handleRequest(Optional.ofNullable(getByIdPath.get().getGet()), classTypeForRestService.get(), false);
+                                handleRequest(Optional.ofNullable(getByIdPath.get().getPut()), classTypeForRestService.get(), false);
+                                handleRequest(Optional.ofNullable(getByIdPath.get().getDelete()), classTypeForRestService.get(), false);
+                            }
+
+                            Optional<Path> filterPath = Optional.ofNullable(swagger.get().getPath(basePath + "/filter"));
+                            if (filterPath.isPresent()) {
+                                handleRequest(Optional.ofNullable(filterPath.get().getPost()), classTypeForRestService.get(), false);
+                            }
+
+                            Optional<Path> searchFieldPath = Optional.ofNullable(swagger.get().getPath(basePath + "/search/fields"));
+                            if (searchFieldPath.isPresent()) {
+                                handleRequest(Optional.ofNullable(searchFieldPath.get().getGet()), new HashSet<String>().getClass(), false);
+                            }
+
+                            Optional<Path> objectUpdatePath = Optional.ofNullable(swagger.get().getPath(basePath + "/update/{id}"));
+                            if (objectUpdatePath.isPresent()) {
+                                handleRequest(Optional.ofNullable(objectUpdatePath.get().getPut()), classTypeForRestService.get(), false);
+                            }
+                        }
+                    }
+                }
+            } catch (InstantiationException | IllegalAccessException ex) {
+                log.error("Error when handling paths ErrorMessage {}", ex);
+            }
+        });
+
+        swaggerString = Optional.ofNullable(Json.pretty(swagger.get()));
+        return swaggerString;
     }
-    
-    private Class<?> getClassTypeOfrestService(Class restService) {
+
+    private Optional<Swagger> getSwaggerFromJson() {
+        log.trace("Getting swagger from JSON file from resources , method:getSwaggerFromJson");
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream input = classLoader.getResourceAsStream("swagger.json");
+            String swaggerFile = swaggerFile = IOUtils.toString(input, Charset.defaultCharset());
+            SwaggerDeserializationResult readWithInfo = new SwaggerParser().readWithInfo(swaggerFile);
+            Swagger swagger = readWithInfo.getSwagger();
+            return Optional.ofNullable(swagger);
+        } catch (IOException ex) {
+            log.error("Error when extracting Swagger Parser from Json file, ErrorMessage: {}", ex);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<Class<?>> getClassTypeOfrestService(Class restService) {
+        log.trace("Getting the classtype that is used for the webservice, method:getClassTypeOfrestService");
         Type[] genericInterfaces = restService.getGenericInterfaces();
         for (Type genericInterface : genericInterfaces) {
             if (genericInterface instanceof ParameterizedType) {
                 Type[] genericTypes = ((ParameterizedType) genericInterface).getActualTypeArguments();
                 for (Type genericType : genericTypes) {
-                    return (Class) genericType;
+                    return Optional.ofNullable((Class) genericType);
                 }
             }
         }
-        return null;
+        return Optional.empty();
     }
-    
-    private void handleGet(Path path, Class<?> clazz) {
-        if (path.getGet() != null) {
-            Operation get = path.getGet();
-            if (get.getResponses() != null) {
-                setSchemaResponses(get.getResponses(), clazz);
-            }
-        }
-    }
-    
-    private void handlePost(Path path, Class<?> clazz, Boolean addInParam) {
-        if (path.getPost() != null) {
-            Operation post = path.getPost();
-            if (post.getResponses() != null) {
-                setSchemaResponses(post.getResponses(), clazz);
+
+    private void handleRequest(Optional<Operation> operation, Class<?> clazz, Boolean addInParam) {
+        if (operation.isPresent()) {
+            log.trace("Setting params for Operation {} for classType {}, method:handleRequest", operation.get().getOperationId(), clazz.getSimpleName());
+            Optional<Map<String, Response>> responses = Optional.ofNullable(operation.get().getResponses());
+            if (responses.isPresent()) {
+                setSchemaResponses(responses.get(), clazz);
             }
             if (addInParam) {
-                if (post.getParameters().size() == 1) {
+                if (operation.get().getParameters().size() == 1) {
                     try {
-                        BodyParameter get = (BodyParameter) post.getParameters().get(0);
+                        BodyParameter get = (BodyParameter) operation.get().getParameters().get(0);
                         get.setSchema(new GenericSwaggerModel(clazz));
                     } catch (ClassCastException e) {
-                        log.error("Error when trying to cast param to BodyParam method:handlePost Error:{} ", e);
+                        log.error("Error when trying to cast param to BodyParam method:handleRequest Error:{} ", e);
                     }
                 }
             }
         }
     }
-    
-    private void handlePut(Path path, Class<?> clazz) {
-        if (path.getPut() != null) {
-            Operation put = path.getPut();
-            if (put.getResponses() != null) {
-                setSchemaResponses(put.getResponses(), clazz);
-            }
-        }
-    }
-    
-    private void handleDelete(Path path, Class<?> clazz) {
-        if (path.getDelete() != null) {
-            Operation delete = path.getDelete();
-            if (delete.getResponses() != null) {
-                setSchemaResponses(delete.getResponses(), clazz);
-            }
-        }
-    }
-    
+
     private void setSchemaResponses(Map<String, Response> responses, Class<?> clazz) {
         responses.entrySet().forEach((Map.Entry<String, Response> entry) -> {
             switch (entry.getKey()) {
@@ -185,5 +184,5 @@ public class SwaggerExtractor {
             }
         });
     }
-    
+
 }

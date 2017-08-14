@@ -8,7 +8,6 @@ package se.backede.archetype;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.negod.generics.persistence.entity.GenericEntity;
-import io.swagger.models.parameters.Parameter;
 import io.swagger.models.properties.ArrayProperty;
 import io.swagger.models.properties.DateProperty;
 import io.swagger.models.properties.DoubleProperty;
@@ -23,6 +22,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,6 +76,9 @@ public class PropertyCreator<T extends GenericEntity> {
                 RefProperty refProp = new RefProperty();
                 refProp.set$ref(entityClass.getSimpleName());
                 arrayProperty.setItems(refProp);
+            } else if (entityClass.equals(String.class)) {
+                StringProperty stringProp = new StringProperty();
+                arrayProperty.setItems(stringProp);
             }
             retProperty.setName(field.getName());
             return arrayProperty;
@@ -104,20 +107,20 @@ public class PropertyCreator<T extends GenericEntity> {
         return "";
     }
 
-    public String getBasePath(Class<?> clazz) {
+    public Optional<String> getBasePath(Class<?> clazz) {
         log.trace("Extracting basePath ( SWAGGER ) for entity class {} [ RestLayer ] method:getBasePath", clazz.getSimpleName());
         try {
             String fieldAnnotation = Path.class.getName();
             for (Annotation annotation : clazz.getAnnotations()) {
                 if (annotation.annotationType().getName().equals(fieldAnnotation)) {
                     Path extracted = (Path) annotation;
-                    return extracted.value();
+                    return Optional.ofNullable(extracted.value());
                 }
             }
         } catch (IllegalArgumentException ex) {
             log.error("Error when extracting searchFields {} [ RestLayer ]", ex);
         }
-        return "";
+        return Optional.empty();
     }
 
 }
