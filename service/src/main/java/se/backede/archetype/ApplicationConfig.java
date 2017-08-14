@@ -20,17 +20,16 @@ public class ApplicationConfig extends Application {
     }
 
     /**
-     * Do not modify addRestResourceClasses() method.
-     * It is automatically populated with
-     * all resources defined in the project.
-     * If required, comment out calling this method in getClasses().
+     * Do not modify addRestResourceClasses() method. It is automatically
+     * populated with all resources defined in the project. If required, comment
+     * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(se.backede.archetype.CorsFilter.class);
         resources.add(se.backede.archetype.control.Domain.class);
         resources.add(se.backede.archetype.control.Service.class);
-        resources.add(se.backede.archetype.control.Swagger.class);
         resources.add(se.backede.archetype.control.User.class);
+        resources.add(se.backede.archetype.control.swagger.Swagger.class);
     }
-    
+
 }

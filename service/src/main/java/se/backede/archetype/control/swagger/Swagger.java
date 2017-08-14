@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package se.backede.archetype.control;
+package se.backede.archetype.control.swagger;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -34,7 +34,7 @@ public class Swagger {
             if (swaggerString.isPresent()) {
                 return swaggerString.get();
             }
-        } catch (InstantiationException | IllegalAccessException ex) {
+        } catch (Exception ex) {
             log.error("Error when retrieving Swagger JSON [ RestLayer ], ErrorMessage: {}", ex);
         }
         return "N/A";
