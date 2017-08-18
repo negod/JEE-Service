@@ -56,8 +56,8 @@
         <enunciate.version>2.6.0</enunciate.version>
         
         <!-- Backede libs -->
-        <persistence.version>1.4-SNAPSHOT</persistence.version>
-        <webservice.version>1.3-SNAPSHOT</webservice.version>
+        <persistence.version>1.4</persistence.version>
+        <webservice.version>1.3</webservice.version>
         
     </properties>
     

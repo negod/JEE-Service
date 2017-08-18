@@ -1,6 +1,3 @@
-/**
- * Do not forget to rename the @responseType to the actual entityclass for each required method
- */
 package se.backede.archetype.boundary;
 
 import com.negod.generics.persistence.GenericDao;
