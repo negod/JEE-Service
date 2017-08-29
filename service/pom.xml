@@ -263,39 +263,7 @@
                 </plugins>
             </build>
         </profile>
-        
-        <!-- GENERATE PROPERTIES FILE USED FOR LOGGBACK (logging.properties)-->
-        <!-- mvn clean install -Pgenerate-properties -->
-        <profile>
-            
-            <activation>
-                <property>
-                    <name>init</name>
-                </property>
-            </activation>
-            
-            <id>generate-properties</id>
-            <build>
-                <plugins>	
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>properties-maven-plugin</artifactId>
-                        <version>1.0.0</version>
-                        <executions>
-                            <execution>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>write-project-properties</goal>
-                                </goals>
-                                <configuration>
-                                    <outputFile>${basedir}/src/main/resources/logging.properties</outputFile>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>  
+  
         
         <!-- GENERATE SWAGGER REST API DOCUMENTATION -->
         <!-- mvn clean install -Pgenerate-swagger -Dswagger.hostname=localhost -Dswagger.port=8080 -->
