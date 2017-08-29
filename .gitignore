@@ -24,10 +24,7 @@ hs_err_pid*
 /SoapUi/src/main/resources/
 /SoapUi/target
 /Database/nbactions-mysql.xml
-/Database/src/main/resources/app.properties
 /Database/target
-/Service/src/main/resources/app.properties
-/Service/src/main/resources/logging.properties
 /Service/nb-configuration.xml
 /Service/target
 /Service/src/main/webapp/apidocs/
@@ -37,8 +34,6 @@ Service_Test-Create-Create-0-FAILED.txt
 /service/src/main/webapp/apidocs/
 /soapUi/src/main/resources/
 /database/nbactions-mysql.xml
-/service/src/main/resources/app.properties
-/service/src/main/resources/logging.properties
 /service/target/
 /service/nbproject/
 /service/nb-configuration.xml
