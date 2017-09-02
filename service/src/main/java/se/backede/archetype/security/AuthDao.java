@@ -7,8 +7,8 @@ package se.backede.archetype.security;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import se.backede.webservice.exception.AuthorizationException;
 import se.backede.webservice.security.AuthorizationDao;
-import se.backede.webservice.security.AuthorizationException;
 import se.backede.webservice.security.Credentials;
 
 /**
