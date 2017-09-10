@@ -5,12 +5,14 @@
  */
 package se.backede.archetype.boundary.registry;
 
-import java.util.Optional;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import se.backede.webservice.registry.RegistryEntity;
+import se.backede.webservice.exception.CreateNotPossibleException;
+import se.backede.webservice.exception.ServiceNotMatchException;
 import se.backede.webservice.registry.ServiceRegistry;
 
 /**
@@ -20,26 +22,34 @@ import se.backede.webservice.registry.ServiceRegistry;
 @Singleton
 @Startup
 @Slf4j
+@Data
 public class Registry extends ServiceRegistry {
-
+    
     @PostConstruct
     public void init() {
-        Optional<RegistryEntity> register = register();
-
-        register.ifPresent(data -> {
-            log.debug("Successfully registered service: {} with URL: {}", data.getServiceName(), data.getUrl());
-        });
-
+        try {
+            register().ifPresent(data -> {
+                log.info("Successfully registered service: {} with URL: {}", data.getServiceName(), data.getUrl());
+            });
+        } catch (CreateNotPossibleException | ServiceNotMatchException ex) {
+            log.error("Error when registering service {}", getServiceName());
+        }
     }
-
+    
+    @PreDestroy
+    public void shutdown() {
+        log.info("Shutting down service {}, setting offline", getServiceName());
+        setOffline();
+    }
+    
     @Override
     public String getServiceName() {
         return "archetype2";
     }
-
+    
     @Override
     public String getRegistryVersion() {
         return "1.0-SNAPSHOT";
     }
-
+    
 }

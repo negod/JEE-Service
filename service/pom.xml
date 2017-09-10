@@ -32,7 +32,7 @@
     <artifactId>service</artifactId>
     <packaging>war</packaging>
 
-    <name>service</name>
+    <name>${project.parent.artifactId}-service</name>
     
     <properties>
 
@@ -56,7 +56,7 @@
         <enunciate.version>2.6.0</enunciate.version>
         
         <!-- Backede libs -->
-        <persistence.version>1.4</persistence.version>
+        <persistence.version>1.5-SNAPSHOT</persistence.version>
         <webservice.version>1.4-SNAPSHOT</webservice.version>
         
     </properties>
